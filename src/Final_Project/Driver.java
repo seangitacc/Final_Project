@@ -27,7 +27,7 @@ public class Driver {
 
         // Iterate through the result and print the student names
         while (resultSet.next())
-            System.out.println(resultSet.getString(1) + "\t" + resultSet.getString(2));
+            System.out.println(resultSet.getString(1));
 
         // Close the connection
         connection.close();
