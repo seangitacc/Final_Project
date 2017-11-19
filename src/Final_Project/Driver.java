@@ -1,6 +1,9 @@
 package Final_Project;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.sql.*;
+import java.util.Scanner;
 
 public class Driver {
 
@@ -28,6 +31,19 @@ public class Driver {
         // Iterate through the result and print the student names
         while (resultSet.next())
             System.out.println(resultSet.getString(1));
+
+        Customer c1 = new Customer();
+
+        Scanner input = new Scanner(System.in);
+        System.out.print("Please enter a username: ");
+
+        c1.setUsername(input.next());
+
+        System.out.print("Please enter a password: ");
+
+        c1.setPassword(input.next());
+
+        statement.executeUpdate("INSERT INTO users " + "(username, password) VALUES (" + "'" + c1.getUsername() + "' , '" + c1.getPassword() + "')");
 
         // Close the connection
         connection.close();
