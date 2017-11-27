@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by nikhilpalli on 11/26/17.
  */
-//4
+
 public class LoginScreen extends JFrame {
 
     private JButton enterButton;
@@ -20,7 +20,7 @@ public class LoginScreen extends JFrame {
 
     public LoginScreen(){
         super("Airplane Application");
-        setLayout(new FlowLayout());
+        setLayout(new FlowLayout ());
 
 
         welcomeMessage = new JLabel("Welcome to Airline Application");
@@ -33,32 +33,36 @@ public class LoginScreen extends JFrame {
         add(registerButton);
 
 
-        LoginHandler enterToApp = new LoginHandler();
+        HandlerClass enterToApp = new HandlerClass();
         enterButton.addActionListener(enterToApp);
 
-        RegisterHandler registerUser = new RegisterHandler();
+        HandlerClassTwo registerUser = new HandlerClassTwo();
         registerButton.addActionListener(registerUser);
     }
 }
 
-class LoginHandler implements ActionListener {
+class HandlerClass implements ActionListener {
 
     public void actionPerformed(ActionEvent event) {
 
 
-        JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
+        String username = JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
 
-        JOptionPane.showInputDialog ( "Enter Password", String.format ( "" ) );
+        String password = JOptionPane.showInputDialog ( "Enter Password", String.format ( "" ) );
+
+        Customer c1 = new Customer();
+        c1.login(username, password);
+        c1.setIsReturning(true);
 
     }
 }
-class RegisterHandler implements ActionListener{
+class HandlerClassTwo implements ActionListener{
 
     public void actionPerformed(ActionEvent event){
 
 
         JFrame frame = new JFrame();
-        String name;
+        String firstName;
         String username;
         String password;
         String confirmPassword;
@@ -66,7 +70,7 @@ class RegisterHandler implements ActionListener{
 
 
 
-        name = JOptionPane.showInputDialog ( "Enter name:", String.format ( "" ) );
+        firstName = JOptionPane.showInputDialog ( "Enter first name:", String.format ( "" ) );
         username = JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
 
 
@@ -81,6 +85,8 @@ class RegisterHandler implements ActionListener{
 
         }while(!password.equals(confirmPassword));
 
+        Customer c1 = new Customer();
+        c1.register(username, password, firstName);
 
 
     }
