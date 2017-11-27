@@ -13,7 +13,9 @@ public class Driver {
         Utilities.createStatement();
 
         Customer c1 = new Customer();
-        c1.register();
+        //c1.register();
+
+        c1.login();
 
         // Close the connection
         Utilities.connection.close();
