@@ -9,6 +9,8 @@ public class Driver {
 
     public static void main(String[] args) throws Exception, ClassNotFoundException {
 
+
+
         JWindow window = new JWindow();
         window.getContentPane().add(
                 new JLabel("", new ImageIcon(new URL ("https://s.hswstatic.com/gif/airplanes-work-1.jpg")), SwingConstants.CENTER));
@@ -36,7 +38,6 @@ public class Driver {
 
         // Close the connection
         //Utilities.connection.close();
-
 
     }
 

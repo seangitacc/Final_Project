@@ -20,7 +20,8 @@ public class LoginScreen extends JFrame {
 
     public LoginScreen(){
         super("Airplane Application");
-        setLayout(new FlowLayout ());
+        setLayout(new FlowLayout());
+
 
         welcomeMessage = new JLabel("Welcome to Airline Application");
         add(welcomeMessage);
@@ -32,40 +33,42 @@ public class LoginScreen extends JFrame {
         add(registerButton);
 
 
-        HandlerClass enterToApp = new HandlerClass();
+        LoginHandler enterToApp = new LoginHandler();
         enterButton.addActionListener(enterToApp);
 
-        HandlerClassTwo registerUser = new HandlerClassTwo();
+        RegisterHandler registerUser = new RegisterHandler();
         registerButton.addActionListener(registerUser);
     }
 }
 
-class HandlerClass implements ActionListener {
+class LoginHandler implements ActionListener {
 
     public void actionPerformed(ActionEvent event) {
 
 
-        String username = JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
+        JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
 
-        String password = JOptionPane.showInputDialog ( "Enter Password", String.format ( "" ) );
-
-        Customer c1 = new Customer();
-        c1.login(username, password);
-        c1.setIsReturning(true);
+        JOptionPane.showInputDialog ( "Enter Password", String.format ( "" ) );
 
     }
 }
-class HandlerClassTwo implements ActionListener{
+class RegisterHandler implements ActionListener{
 
     public void actionPerformed(ActionEvent event){
 
 
         JFrame frame = new JFrame();
+        String name;
+        String username;
         String password;
         String confirmPassword;
 
 
-        String username = JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
+
+
+        name = JOptionPane.showInputDialog ( "Enter name:", String.format ( "" ) );
+        username = JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
+
 
         do {
             password = JOptionPane.showInputDialog ( "Enter Password", String.format ( "" ) );
@@ -78,8 +81,6 @@ class HandlerClassTwo implements ActionListener{
 
         }while(!password.equals(confirmPassword));
 
-        Customer c1 = new Customer();
-        c1.register(username, password);
 
 
     }
