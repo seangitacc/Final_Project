@@ -1,6 +1,5 @@
 package Final_Project;
 
-import javax.rmi.CORBA.Util;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
@@ -8,23 +7,11 @@ import java.util.Scanner;
 public class Customer extends User implements newUser, returningUser {
 
 
-    static void register(){
+    public static void register(String username, String password){
 
         try {
 
-            Scanner input = new Scanner(System.in);
-
-            Customer c1 = new Customer();
-
-            System.out.print("Please enter a username: ");
-
-            c1.setUsername(input.next());
-
-            System.out.print("Please enter a password: ");
-
-            c1.setPassword(input.next());
-
-            Utilities.statement.executeUpdate("INSERT INTO users " + "(username, password) VALUES (" + "'" + c1.getUsername() + "' , '" + c1.getPassword() + "')");
+            Utilities.statement.executeUpdate("INSERT INTO users " + "(username, password) VALUES (" + "'" + username + "' , '" + password + "')");
 
         }catch (Exception ex){
 
@@ -34,20 +21,9 @@ public class Customer extends User implements newUser, returningUser {
 
     }
 
-    static void login(){
-
-        Scanner input = new Scanner(System.in);
-
+    public static void login(String username, String password){
 
         try{
-
-        System.out.print("Please enter your username: ");
-
-        String username = input.next();
-
-        System.out.print("Please enter your password: ");
-
-        String password = input.next();
 
             PreparedStatement ps = Utilities.connection.prepareStatement
                             ("SELECT user_id FROM users WHERE username = ? AND password = ?");
@@ -58,7 +34,7 @@ public class Customer extends User implements newUser, returningUser {
             if (rs.next()) {
                 System.out.println("Nice!");
             } else {
-                // Quest not completed yet
+                System.out.println("Your username or password is invalid!");
             }
 
 

@@ -1,5 +1,7 @@
 package GUI;
 
+import Final_Project.Customer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,9 +45,13 @@ class HandlerClass implements ActionListener {
     public void actionPerformed(ActionEvent event) {
 
 
-        JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
+        String username = JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
 
-        JOptionPane.showInputDialog ( "Enter Password", String.format ( "" ) );
+        String password = JOptionPane.showInputDialog ( "Enter Password", String.format ( "" ) );
+
+        Customer c1 = new Customer();
+        c1.login(username, password);
+        c1.setIsReturning(true);
 
     }
 }
@@ -59,7 +65,7 @@ class HandlerClassTwo implements ActionListener{
         String confirmPassword;
 
 
-        JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
+        String username = JOptionPane.showInputDialog ( "Enter Username:", String.format ( "" ) );
 
         do {
             password = JOptionPane.showInputDialog ( "Enter Password", String.format ( "" ) );
@@ -71,6 +77,9 @@ class HandlerClassTwo implements ActionListener{
             }
 
         }while(!password.equals(confirmPassword));
+
+        Customer c1 = new Customer();
+        c1.register(username, password);
 
 
     }

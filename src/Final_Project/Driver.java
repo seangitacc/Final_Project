@@ -15,7 +15,7 @@ public class Driver {
         window.setBounds(500, 150, 300, 200);
         window.setVisible(true);
         try {
-            Thread.sleep(50);
+            Thread.sleep(500);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,13 +34,8 @@ public class Driver {
         Utilities.createConnnection();;
         Utilities.createStatement();
 
-        Customer c1 = new Customer();
-        //c1.register();
-
-        c1.login();
-
         // Close the connection
-        Utilities.connection.close();
+        //Utilities.connection.close();
 
 
     }
