@@ -63,42 +63,47 @@ public class RegisterWindow {
 
         backButton.setOnAction ( e -> RegisterWindow.close() );
 
+        adminCheck.setOnAction((event) -> {
+                    if (adminCheck.isSelected()) {
+
+                        TextInputDialog dialog = new TextInputDialog(null);
+                        dialog.setTitle("Admin Security Password");
+                        dialog.setHeaderText(null);
+                        dialog.setContentText("Enter Master Password: ");
+
+                        Optional<String> result = dialog.showAndWait();
+                        result.ifPresent(name -> {
+                            if (name.equals(Customer.adminPassword)) {
+
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Sick");
+                                alert.setHeaderText("YAS");
+                                alert.setContentText("Urkewl");
+
+                                alert.showAndWait();
+
+
+                            } else {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Error");
+                                alert.setHeaderText("Invalid Password");
+                                alert.setContentText("Uncheck Admin Box");
+
+                                alert.showAndWait();
+
+                                adminCheck.setSelected(false);
+                            }
+
+
+                        });
+
+                    }
+
+                });
+
         submitButton.setOnAction ( e -> {
 
-              if (adminCheck.isSelected ()) {
-
-                  TextInputDialog dialog = new TextInputDialog ( null );
-                  dialog.setTitle ( "Admin Security Password" );
-                  dialog.setHeaderText ( null );
-                  dialog.setContentText ( "Enter Master Password: " );
-
-                  Optional<String> result = dialog.showAndWait ();
-                  result.ifPresent ( name -> {
-                      if (name.equals ( Customer.adminPassword )) {
-
-                          Alert alert = new Alert ( Alert.AlertType.INFORMATION );
-                          alert.setTitle ( "Sick" );
-                          alert.setHeaderText ( "YAS" );
-                          alert.setContentText ( "Urkewl" );
-
-                          alert.showAndWait ();
-
-                          Customer.adminBool = true;
-
-
-                      } else {
-                          Alert alert = new Alert ( Alert.AlertType.ERROR );
-                          alert.setTitle ( "Error" );
-                          alert.setHeaderText ( "Invalid Password" );
-                          alert.setContentText ( "Uncheck Admin Box" );
-
-                          alert.showAndWait ();
-                      }
-
-
-                  } );
-
-                  if (pwtf.getText () != null || Customer.adminBool == true) {
+                  if (pwtf.getText () != null) {
 
                       //Check to see if confirm and password match
                       if (pwtf.getText ().equals ( cpwtf.getText () )) {
@@ -136,12 +141,7 @@ public class RegisterWindow {
                       alert.showAndWait ();
 
                   }
-              }
-
-
-
-
-        } );
+              });
 
         GridPane grid = new GridPane ();
         grid.setPadding(new Insets ( 25 ));
