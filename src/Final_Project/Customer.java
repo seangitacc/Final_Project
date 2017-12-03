@@ -5,18 +5,18 @@ import javafx.scene.control.Alert;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
-
 public class Customer extends User implements newUser, returningUser {
 
     private static int userID;
 
 
-    public static void register(String username, String password, String firstName){
+    public static void register(String firstName, String lastName, String addressLine, int zipcode, String state, String username, String password, String email, String ssn, String secQuestion, String secAnswer){
 
         try {
 
-            Utilities.statement.executeUpdate("INSERT INTO users " + "(username, password, firstName) VALUES (" + "'" + username + "' , '" + password + "' , '" + firstName +"')");
+            Utilities.statement.executeUpdate("INSERT INTO users " + "(username, password, firstName, lastName, addressLine, zipcode, state, email, ssn, secQuestion, secAnswer) VALUES ("
+                    + "'" + username + "' , '" + password + "' , '" + firstName + "' , '" + lastName + "' , '" + addressLine + "' , '" + zipcode + "' , '" + state + "' , '" + email +
+                    "' , '" + email + "' , '" + ssn + "' , '" + secQuestion + "' , '" + secAnswer + "')");
 
         }catch (Exception ex){
 
