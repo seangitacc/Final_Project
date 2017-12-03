@@ -1,5 +1,6 @@
 package GUI;
 
+import Final_Project.Customer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -83,9 +84,12 @@ public class forgotPasswordWindow {
         Scene scene2 = new Scene(grid2, 350,200);
 
         retrieveQuestion.setOnAction ( e -> {
-                 // Customer.getPassword(usInput.getText (), ssnInput.getText ());
-               if(true) {
+
+               if(Customer.checkUser(usInput.getText(), ssnInput.getText())) {
+                   questiontf.setText(Customer.retriveSecquestion(usInput.getText(), ssnInput.getText()));
+
                     forgotPasswordWindow.setScene ( scene2 );
+
                }
                else {
                    Alert alert = new Alert( Alert.AlertType.ERROR);
@@ -96,10 +100,34 @@ public class forgotPasswordWindow {
                    alert.showAndWait ();
                }
 
-        }
+        });
 
+        retrievePassword.setOnAction( e2 -> {
 
-            );
+            String retrievedPassword = Customer.checkSecAnswer(usInput.getText(), answer.getText());
+
+            if(retrievedPassword.equals("invalid")){
+
+                Alert alert = new Alert( Alert.AlertType.ERROR);
+                alert.setTitle ( "Error!" );
+                alert.setHeaderText ( null );
+                alert.setContentText ( "Your security answer is wrong!" );
+
+                alert.showAndWait ();
+
+            }else{
+
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                alert.setTitle ( "Your Password" );
+                alert.setHeaderText ( null );
+                alert.setContentText ( "Your password is: " + retrievedPassword );
+
+                alert.showAndWait ();
+
+            }
+
+        });
+
         back.setOnAction ( e -> forgotPasswordWindow.close () );
         back1.setOnAction ( e -> forgotPasswordWindow.setScene ( scene1 ) );
 
