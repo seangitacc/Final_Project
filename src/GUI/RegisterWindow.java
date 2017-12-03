@@ -58,6 +58,8 @@ public class RegisterWindow {
 
         backButton.setOnAction ( e -> RegisterWindow.close() );
 
+
+
         GridPane grid = new GridPane ();
         grid.setPadding(new Insets ( 25 ));
         grid.setVgap ( 8 );
