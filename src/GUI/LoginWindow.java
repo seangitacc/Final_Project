@@ -1,5 +1,6 @@
 package GUI;
 
+import Final_Project.Customer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,9 +42,10 @@ public class LoginWindow {
         back.setOnAction ( e -> LoginWindow.close() );
         forgotPassword.setOnAction ( e -> forgotPasswordWindow.display () );
         login.setOnAction ( e -> {
+
             String username = usernametf.getText ();
             String password = passwordtf.getText();
-            System.out.println(username + " " + password);
+            Customer.login ( username,password );
 
         } );
 

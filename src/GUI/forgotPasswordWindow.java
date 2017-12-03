@@ -90,7 +90,7 @@ public class forgotPasswordWindow {
                else {
                    Alert alert = new Alert( Alert.AlertType.INFORMATION);
                    alert.setTitle ( "Warning" );
-                   alert.setHeaderText ( "Invalid input!" );
+                   alert.setHeaderText ( "Invalid Input!" );
                    alert.setContentText ( "Please Enter correct username and SSN" );
 
                    alert.showAndWait ();

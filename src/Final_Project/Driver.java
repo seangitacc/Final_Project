@@ -35,6 +35,7 @@ public class Driver extends Application {
         EntryWindow.setTitle ( "Ayrlyne" );
         EntryWindow.setMinHeight ( 250 );
 
+
         javafx.scene.control.Label welcomeMessage = new javafx.scene.control.Label( "Welcome to Ayrlyne!" );
         welcomeMessage.setFont(new Font("Helvetica", 36));
         javafx.scene.control.Button loginButton = new javafx.scene.control.Button("Click to Login!");

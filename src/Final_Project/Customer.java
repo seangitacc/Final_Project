@@ -1,8 +1,11 @@
 package Final_Project;
 
+import javafx.scene.control.Alert;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Scanner;
+
+
 
 public class Customer extends User implements newUser, returningUser {
 
@@ -37,7 +40,12 @@ public class Customer extends User implements newUser, returningUser {
                 System.out.println("Nice!");
                 userID = rs.getInt(1);
             } else {
-                System.out.println("Your username or password is invalid!");
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                alert.setTitle ( "Warning" );
+                alert.setHeaderText ( "Invalid Input!" );
+                alert.setContentText ( "Please Enter Correct Username and Password" );
+
+                alert.showAndWait ();
             }
 
 
