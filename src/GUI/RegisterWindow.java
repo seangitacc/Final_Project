@@ -1,11 +1,13 @@
 package GUI;
 
+import Final_Project.Customer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.*;
 import javafx.scene.control.Label;
@@ -58,6 +60,35 @@ public class RegisterWindow {
 
         backButton.setOnAction ( e -> RegisterWindow.close() );
 
+        submitButton.setOnAction ( e -> {
+
+            if(pwtf.getText().equals(cpwtf.getText())){
+
+                Customer.register (fntf.getText(), lntf.getText(), adrstf.getText(), ziptf.getText(), sttf.getText(), untf.getText(), pwtf.getText(), emailtf.getText(),
+                        ssntf.getText(), sqtf.getText(), anstf.getText());
+
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                alert.setTitle ( "Succesfully Created Account" );
+                alert.setHeaderText ( "WooHoo!" );
+                alert.setContentText ( "Click 'OK' to log in." );
+
+                alert.showAndWait ();
+
+                RegisterWindow.close();
+
+            }else {
+
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                alert.setTitle ( "Warning" );
+                alert.setHeaderText ( "Invalid Input!" );
+                alert.setContentText ( "Your passwords do not match!" );
+
+                alert.showAndWait ();
+
+            }
+
+        } );
+
         GridPane grid = new GridPane ();
         grid.setPadding(new Insets ( 25 ));
         grid.setVgap ( 8 );
@@ -98,7 +129,6 @@ public class RegisterWindow {
 
         RegisterWindow.setScene ( registerScene);
         RegisterWindow.showAndWait ();
-
 
 
     }
