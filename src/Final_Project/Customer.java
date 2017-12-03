@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 public class Customer extends User implements newUser, returningUser {
 
     private static int userID;
+    public static final String adminPassword = "iluvaria";
+    public static boolean adminBool = false;
 
 
     public static void register(String firstName, String lastName, String addressLine, String zipcode, String state, String username, String password, String email, String ssn, String secQuestion, String secAnswer){

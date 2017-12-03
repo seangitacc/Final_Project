@@ -7,17 +7,16 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 /**
  * Created by nikhilpalli on 12/1/17.
@@ -43,6 +42,7 @@ public class RegisterWindow {
         Label ssnl = new Label ( "Social Security: " );
         Label sql = new Label ( "Security Quesiton: " );
         Label ans = new Label ("Security Answer: ");
+        Label admin = new Label("Check if you're an admin: ");
         TextField fntf = new TextField ();
         TextField lntf = new TextField ();
         TextField adrstf = new TextField ();
@@ -54,39 +54,92 @@ public class RegisterWindow {
         TextField emailtf = new TextField ();
         TextField ssntf = new TextField ();
         TextField sqtf = new TextField ();
-        TextField anstf = new TextField (  );
+        TextField anstf = new TextField ();
+        CheckBox adminCheck = new CheckBox (  );
+
         Button backButton = new Button("Back");
         Button submitButton = new Button("Submit");
+
 
         backButton.setOnAction ( e -> RegisterWindow.close() );
 
         submitButton.setOnAction ( e -> {
 
-            //Check to see if confirm and password match
-            if(pwtf.getText().equals(cpwtf.getText())){
+              if (adminCheck.isSelected ()) {
 
-                Customer.register (fntf.getText(), lntf.getText(), adrstf.getText(), ziptf.getText(), sttf.getText(), untf.getText(), pwtf.getText(), emailtf.getText(),
-                        ssntf.getText(), sqtf.getText(), anstf.getText());
+                  TextInputDialog dialog = new TextInputDialog ( null );
+                  dialog.setTitle ( "Admin Security Password" );
+                  dialog.setHeaderText ( null );
+                  dialog.setContentText ( "Enter Master Password: " );
 
-                Alert alert = new Alert( Alert.AlertType.INFORMATION);
-                alert.setTitle ( "Succesfully Created Account" );
-                alert.setHeaderText ( "Woohoo!" );
-                alert.setContentText ( "Click 'OK' to log in." );
+                  Optional<String> result = dialog.showAndWait ();
+                  result.ifPresent ( name -> {
+                      if (name.equals ( Customer.adminPassword )) {
 
-                alert.showAndWait ();
+                          Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                          alert.setTitle ( "Sick" );
+                          alert.setHeaderText ( "YAS" );
+                          alert.setContentText ( "Urkewl" );
 
-                RegisterWindow.close();
+                          alert.showAndWait ();
 
-            }else {
+                          Customer.adminBool = true;
 
-                Alert alert = new Alert( Alert.AlertType.INFORMATION);
-                alert.setTitle ( "Warning" );
-                alert.setHeaderText ( "Invalid Input!" );
-                alert.setContentText ( "Your passwords do not match!" );
 
-                alert.showAndWait ();
+                      } else {
+                          Alert alert = new Alert ( Alert.AlertType.ERROR );
+                          alert.setTitle ( "Error" );
+                          alert.setHeaderText ( "Invalid Password" );
+                          alert.setContentText ( "Uncheck Admin Box" );
 
-            }
+                          alert.showAndWait ();
+                      }
+
+
+                  } );
+
+                  if (pwtf.getText () != null || Customer.adminBool == true) {
+
+                      //Check to see if confirm and password match
+                      if (pwtf.getText ().equals ( cpwtf.getText () )) {
+
+                          Customer.register ( fntf.getText (), lntf.getText (), adrstf.getText (), ziptf.getText (), sttf.getText (), untf.getText (), pwtf.getText (), emailtf.getText (),
+                                  ssntf.getText (), sqtf.getText (), anstf.getText () );
+
+                          Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                          alert.setTitle ( "Succesfully Created Account" );
+                          alert.setHeaderText ( "Woohoo!" );
+                          alert.setContentText ( "Click 'OK' to log in." );
+
+                          alert.showAndWait ();
+
+                          RegisterWindow.close ();
+
+                      } else {
+
+                          Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                          alert.setTitle ( "Warning" );
+                          alert.setHeaderText ( "Invalid Input!" );
+                          alert.setContentText ( "Your passwords do not match!" );
+
+                          alert.showAndWait ();
+
+                      }
+
+                  }else{
+
+                      Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                      alert.setTitle ( "Warning" );
+                      alert.setHeaderText ( "Invalid Input!" );
+                      alert.setContentText ( "You have some null values!" );
+
+                      alert.showAndWait ();
+
+                  }
+              }
+
+
+
 
         } );
 
@@ -108,6 +161,7 @@ public class RegisterWindow {
         GridPane.setConstraints ( ssnl,0,9);
         GridPane.setConstraints ( sql,0,10 );
         GridPane.setConstraints ( ans,0,11 );
+        GridPane.setConstraints ( admin,0,12 );
         GridPane.setConstraints ( fntf,1,0);
         GridPane.setConstraints ( lntf,1,1 );
         GridPane.setConstraints ( adrstf,1,2 );
@@ -120,10 +174,11 @@ public class RegisterWindow {
         GridPane.setConstraints ( ssntf,1,9 );
         GridPane.setConstraints ( sqtf,1,10 );
         GridPane.setConstraints ( anstf,1,11 );
-        GridPane.setConstraints ( backButton,0,13 );
-        GridPane.setConstraints ( submitButton,3,13 );
+        GridPane.setConstraints ( adminCheck,1,12 );
+        GridPane.setConstraints ( backButton,0,14 );
+        GridPane.setConstraints ( submitButton,3,14 );
 
-        grid.getChildren ().addAll ( fnl,lnl,adrsl,zipl,stl,unl,pwl, cpwl,emaill,ssnl,sql,fntf,lntf,adrstf,ziptf,sttf,untf,pwtf, cpwtf, emailtf,ssntf,sqtf,ans, anstf, backButton,submitButton );
+        grid.getChildren ().addAll ( fnl,lnl,adrsl,zipl,stl,unl,pwl, cpwl,emaill,ssnl,sql,fntf,lntf,adrstf,ziptf,sttf,untf,pwtf, cpwtf, emailtf,ssntf,sqtf,ans, anstf, backButton,submitButton,admin,adminCheck );
 
         grid.setAlignment ( Pos.CENTER );
         Scene registerScene = new Scene ( grid, 450,550 );
