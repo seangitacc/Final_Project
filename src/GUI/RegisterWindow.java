@@ -62,6 +62,7 @@ public class RegisterWindow {
 
         submitButton.setOnAction ( e -> {
 
+            //Check to see if confirm and password match
             if(pwtf.getText().equals(cpwtf.getText())){
 
                 Customer.register (fntf.getText(), lntf.getText(), adrstf.getText(), ziptf.getText(), sttf.getText(), untf.getText(), pwtf.getText(), emailtf.getText(),
