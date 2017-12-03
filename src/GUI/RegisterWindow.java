@@ -70,7 +70,7 @@ public class RegisterWindow {
 
                 Alert alert = new Alert( Alert.AlertType.INFORMATION);
                 alert.setTitle ( "Succesfully Created Account" );
-                alert.setHeaderText ( "WooHoo!" );
+                alert.setHeaderText ( "Woohoo!" );
                 alert.setContentText ( "Click 'OK' to log in." );
 
                 alert.showAndWait ();

@@ -37,7 +37,7 @@ public class Driver extends Application {
 
 
         javafx.scene.control.Label welcomeMessage = new javafx.scene.control.Label( "Welcome to Ayrlyne!" );
-        welcomeMessage.setFont(new Font("Helvetica", 36));
+        welcomeMessage.setFont(new Font("Helvetica", 48));
         javafx.scene.control.Button loginButton = new javafx.scene.control.Button("Click to Login!");
         javafx.scene.control.Button registerButton = new Button("Click to Register!");
 

@@ -55,7 +55,7 @@ public class Customer extends User implements newUser, returningUser {
                 System.out.println("Nice!");
                 userID = rs.getInt(1);
             } else {
-                Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                Alert alert = new Alert( Alert.AlertType.ERROR);
                 alert.setTitle ( "Warning" );
                 alert.setHeaderText ( "Invalid Input!" );
                 alert.setContentText ( "Please Enter Correct Username and Password" );

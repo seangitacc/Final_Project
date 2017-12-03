@@ -83,12 +83,12 @@ public class forgotPasswordWindow {
         Scene scene2 = new Scene(grid2, 350,200);
 
         retrieveQuestion.setOnAction ( e -> {
-                  //  getPassword(usInput.getText (), ssnInput.getText ())
-               if(false) {
+                 // Customer.getPassword(usInput.getText (), ssnInput.getText ());
+               if(true) {
                     forgotPasswordWindow.setScene ( scene2 );
                }
                else {
-                   Alert alert = new Alert( Alert.AlertType.INFORMATION);
+                   Alert alert = new Alert( Alert.AlertType.ERROR);
                    alert.setTitle ( "Warning" );
                    alert.setHeaderText ( "Invalid Input!" );
                    alert.setContentText ( "Please Enter correct username and SSN" );
