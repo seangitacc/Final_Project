@@ -196,7 +196,28 @@ public class Customer extends User implements newUser, returningUser {
     public static void addFlight(int flightID, int userID){
         try{
 
-            String query = "Insert into flights_users (flight_id, user_id) VALUES (?,?)";
+            String query = "Insert into flights_users (flight_id, user_id) \n" +
+                    "Select * from (SELECT ?, ?) AS tmp\n" +
+                    "WHERE NOT EXISTS (select * from flights_users where user_id = ?)";
+
+            PreparedStatement ps = Utilities.connection.prepareStatement(query);
+
+            ps.setInt(1, flightID);
+            ps.setInt(2, userID);
+            ps.setInt(3, userID);
+
+            ps.execute();
+
+
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+    }
+
+    public static void deleteFlight(int flightID, int userID){
+        try{
+
+            String query = "Delete from flights_users where flight_id = ? AND user_id = ?";
 
             PreparedStatement ps = Utilities.connection.prepareStatement(query);
 
