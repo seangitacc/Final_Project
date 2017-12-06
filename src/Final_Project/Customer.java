@@ -7,7 +7,8 @@ import java.sql.ResultSet;
 
 public class Customer extends User implements newUser, returningUser {
 
-    private static int userID;
+    public static int userID;
+    public static int flightID;
     public static final String adminPassword = "iluvaria";
     public static boolean adminBool = false;
 
@@ -162,6 +163,85 @@ public class Customer extends User implements newUser, returningUser {
 
         return answer;
 
+    }
+
+    public static void checkFlights(String filterType, String filter){
+        try{
+
+            PreparedStatement ps = Utilities.connection.prepareStatement
+                    ("SELECT * FROM flights WHERE + " + filterType + " = ?");
+            ps.setString(1, filter);
+            ResultSet rs = ps.executeQuery();
+
+
+            if (rs.next()) {
+
+                do{
+                    System.out.print(rs.getString("flight_id") + " \t");
+                    System.out.print(rs.getString("from_city") + " \t");
+                    System.out.print(rs.getString("to_city") + " \t");
+                    System.out.print(rs.getString("flight_date") + " \t");
+                    System.out.print(rs.getString("flight_time") + " \t");
+                    System.out.print(rs.getString("flight_price") + " \t");
+                    System.out.println();
+                }while(rs.next());
+
+            }
+
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+    }
+
+    public static void addFlight(int flightID, int userID){
+        try{
+
+            String query = "Insert into flights_users (flight_id, user_id) VALUES (?,?)";
+
+            PreparedStatement ps = Utilities.connection.prepareStatement(query);
+
+            ps.setInt(1, flightID);
+            ps.setInt(2, userID);
+
+            ps.execute();
+
+
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+    }
+
+    public static void searchMyFlights(int userID){
+
+        try {
+
+            PreparedStatement ps = Utilities.connection.prepareStatement
+                    ("SELECT *\n" +
+                            "from flights, users, flights_users\n" +
+                            "where flights.flight_id = flights_users.flight_id AND\n" +
+                            "users.user_id = flights_users.user_id AND\n" +
+                            "users.user_id = ?;");
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+
+
+            if (rs.next()) {
+
+                do {
+                    System.out.print(rs.getString("flight_id") + " \t");
+                    System.out.print(rs.getString("from_city") + " \t");
+                    System.out.print(rs.getString("to_city") + " \t");
+                    System.out.print(rs.getString("flight_date") + " \t");
+                    System.out.print(rs.getString("flight_time") + " \t");
+                    System.out.print(rs.getString("flight_price") + " \t");
+                    System.out.println();
+                } while (rs.next());
+
+            }
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
     }
 
 }

@@ -76,9 +76,9 @@ public class RegisterWindow {
                             if (name.equals(Customer.adminPassword)) {
 
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Sick");
-                                alert.setHeaderText("YAS");
-                                alert.setContentText("Urkewl");
+                                alert.setTitle("Information");
+                                alert.setHeaderText("Correct password!");
+                                alert.setContentText("Welcome, administrator!");
 
                                 alert.showAndWait();
 
@@ -86,8 +86,8 @@ public class RegisterWindow {
                             } else {
                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                 alert.setTitle("Error");
-                                alert.setHeaderText("Invalid Password");
-                                alert.setContentText("Uncheck Admin Box");
+                                alert.setHeaderText("Invalid Password!");
+                                alert.setContentText("We will now uncheck the admin box for you.");
 
                                 alert.showAndWait();
 
