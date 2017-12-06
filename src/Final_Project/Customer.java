@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLWarning;
 
 public class Customer extends User implements newUser, returningUser {
 
@@ -196,17 +197,25 @@ public class Customer extends User implements newUser, returningUser {
     public static void addFlight(int flightID, int userID){
         try{
 
-            String query = "Insert into flights_users (flight_id, user_id) \n" +
-                    "Select * from (SELECT ?, ?) AS tmp\n" +
-                    "WHERE NOT EXISTS (select * from flights_users where user_id = ?)";
-
+            String query = "Insert ignore into flights_users (flight_id, user_id) \n" +
+                            "values (?, ?)";
             PreparedStatement ps = Utilities.connection.prepareStatement(query);
 
             ps.setInt(1, flightID);
             ps.setInt(2, userID);
-            ps.setInt(3, userID);
 
             ps.execute();
+
+            SQLWarning warning = ps.getWarnings();
+
+            if(warning != null){
+                Alert alert = new Alert( Alert.AlertType.ERROR);
+                alert.setTitle ( "Warning" );
+                alert.setHeaderText ( "Flight Booking" );
+                alert.setContentText ( "You've already booked this flight!" );
+
+                alert.showAndWait();
+            }
 
 
         }catch (Exception ex){
