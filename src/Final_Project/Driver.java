@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -31,9 +32,9 @@ public class Driver extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        Stage EntryWindow = new Stage ();
-        EntryWindow.setTitle ( "Ayrlyne" );
-        EntryWindow.setMinHeight ( 250 );
+        Stage MainWindow = new Stage ();
+        MainWindow.setTitle ( "Ayrlyne" );
+        MainWindow.setMinHeight ( 250 );
 
 
         javafx.scene.control.Label welcomeMessage = new javafx.scene.control.Label( "Welcome to Ayrlyne!" );
@@ -54,11 +55,12 @@ public class Driver extends Application {
         hb.setAlignment ( Pos.CENTER );
 
 
-        entryScene = new Scene ( vb , 1250  ,  700);
+        entryScene = new Scene ( vb , 1250  ,  700, Color.rgb ( 200,150,26 ));
 
 
-        EntryWindow.setScene ( entryScene );
-        primaryStage = EntryWindow;
+
+        MainWindow.setScene ( entryScene );
+        primaryStage = MainWindow;
         primaryStage.show();
 
     }

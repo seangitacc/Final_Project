@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -39,14 +40,18 @@ public class LoginWindow {
         Button forgotPassword = new Button("Forgot Password");
         Button back = new Button("Back");
 
+
         back.setOnAction ( e -> LoginWindow.close() );
         forgotPassword.setOnAction ( e -> forgotPasswordWindow.display () );
         login.setOnAction ( e -> {
 
-            String username = usernametf.getText ();
+            SearchFlights.display ();
+           /* String username = usernametf.getText ();
             String password = passwordtf.getText();
             Customer.login ( username,password );
-
+            */
+           LoginWindow.close();
+           MainMenu.display();
 
         } );
 
@@ -68,7 +73,7 @@ public class LoginWindow {
         grid.getChildren ().setAll ( usernamel,usernametf,passwordl,passwordtf);
 
         VBox vb = new VBox ( 20 );
-        vb.getChildren ().addAll ( grid,hb );
+        vb.getChildren ().addAll ( grid,hb);
         grid.setAlignment ( Pos.CENTER );
         hb.setAlignment ( Pos.CENTER );
         vb.setAlignment ( Pos.CENTER );
