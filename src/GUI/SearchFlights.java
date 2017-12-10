@@ -124,27 +124,27 @@ public class SearchFlights {
 
         TableView<Flight> flightTableView = new TableView ();
 
-        TableColumn<Flight, Integer> flightIdColumn = new TableColumn<> ( "Flight ID" );
+        TableColumn<Flight, Integer> flightIdColumn = new TableColumn<Flight, Integer> ( "Flight ID" );
         flightIdColumn.setPrefWidth( 100 );
-        flightIdColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightId") );
+        flightIdColumn.setCellValueFactory ( new PropertyValueFactory<Flight, Integer> ("flightId") );
 
-        TableColumn<Flight, String> fromCityColumn = new TableColumn<> ( "Departure City" );
+        TableColumn<Flight, String> fromCityColumn = new TableColumn<Flight, String> ( "Departure City" );
         fromCityColumn.setPrefWidth ( 200 );
-        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<> ("fromCity") );
+        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("fromCity") );
 
-        TableColumn<Flight, String> toCityColumn = new TableColumn<> ( "Arrival City" );
+        TableColumn<Flight, String> toCityColumn = new TableColumn<Flight, String> ( "Arrival City" );
         fromCityColumn.setPrefWidth ( 200 );
-        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<> ("toCity") );
+        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("toCity") );
 
-        TableColumn<Flight, Date> flightDateColumn = new TableColumn<> ( "Departure Date" );
+        TableColumn<Flight, String> flightDateColumn = new TableColumn<Flight, String> ( "Departure Date" );
         fromCityColumn.setPrefWidth ( 200 );
-        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightDate") );
+        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("flightDate") );
 
-        TableColumn<Flight, Time> flightTimeColumn = new TableColumn<> ( "Flight Time" );
+        TableColumn<Flight, String> flightTimeColumn = new TableColumn<Flight, String> ( "Flight Time" );
         flightIdColumn.setPrefWidth ( 200 );
         flightIdColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightTime") );
 
-        TableColumn<Flight, Double> flightPriceColumn = new TableColumn<> ( "Price" );
+        TableColumn<Flight, Double> flightPriceColumn = new TableColumn<Flight, Double> ( "Price" );
         flightIdColumn.setPrefWidth ( 100 );
         flightIdColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightPrice") );
 
@@ -163,7 +163,7 @@ public class SearchFlights {
         chooseFlight.setScene ( scene2 );
 
         search.setOnAction ( e-> { flightTableView.setItems ( getFlight(from.getPromptText(), to.getPromptText()));
-        flightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn,flightPriceColumn);
+        flightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn, flightPriceColumn);
         chooseFlight.showAndWait (); });
 
         return scene;
