@@ -22,6 +22,8 @@ import javafx.stage.Stage;
  */
 
 import Final_Project.Customer;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -35,9 +37,14 @@ public class MainMenu {
         Label header = new Label("AyrLyne");
         Button searchButton = new Button("Search Flights");
         Button logout = new Button("Logout");
-        Button manageFlights = new Button("Manage Flights");
+        Button manageFlights = new Button("Manage All Flights");
         Label user = new Label("Hello, " + Customer.getName(Customer.userID));
         GridPane grid = new GridPane ();
+
+        grid.setAlignment ( Pos.CENTER );
+        grid.setPadding ( new Insets ( 25 ));
+        grid.setHgap ( 15 );
+        grid.setVgap ( 25 );
 
 
         GridPane.setConstraints ( header,0,0 );

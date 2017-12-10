@@ -110,7 +110,7 @@ public class SearchFlights {
         GridPane.setConstraints ( search,2,11 );
 
 
-        grid.getChildren ().addAll ( fromL, from, toL, to, departtf, departDate, arrivetf, arriveDate, search);
+        grid.getChildren ().addAll ( fromL, from, toL, to, departtf, departDate, search);
         grid2.getChildren ().addAll ( title, user, homeButton, logout );
 
         VBox vb = new VBox ();
