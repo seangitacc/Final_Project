@@ -21,6 +21,9 @@ public class Flight {
     private SimpleStringProperty flightTime;
     private SimpleDoubleProperty flightPrice;
 
+    public Flight(){
+    }
+
     public Flight(int flightId, String fromCity, String toCity, String flightDate, String flightTime, double flightPrice){
 
         this.flightId = new SimpleIntegerProperty(flightId);

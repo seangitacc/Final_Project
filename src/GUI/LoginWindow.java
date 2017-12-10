@@ -85,7 +85,7 @@ public class LoginWindow {
 
         LoginWindow.setScene ( LoginScene );
         LoginWindow.showAndWait ();
-        //
+
     }
 
 }

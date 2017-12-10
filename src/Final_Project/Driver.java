@@ -65,4 +65,11 @@ public class Driver extends Application {
 
     }
 
+    public static void logout(){
+        Customer.userID = 0;
+        Customer.fullName = "";
+        Customer.adminBool = false;
+        Customer.adminCheck = 0;
+        }
+
 }

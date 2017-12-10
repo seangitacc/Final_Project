@@ -1,7 +1,9 @@
 package GUI;
 
 import Final_Project.Customer;
+import Final_Project.Driver;
 import Final_Project.Utilities;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -30,7 +32,10 @@ import java.time.format.DateTimeFormatter;
 public class SearchFlights {
 
 
-    public static Scene display() {
+    public static void display() {
+
+        Stage searchFlightStage = new Stage ();
+        searchFlightStage.setTitle ( "AyrLyne-Search Flights" );
 
         Label title = new Label ( "Search Flights" );
         Label fromL = new Label ( "From " );
@@ -156,6 +161,7 @@ public class SearchFlights {
         vb1.getChildren ().addAll (flightTableView, addFlight);
 
         Scene scene2 = new Scene(vb1,800,600);
+
         Stage chooseFlight = new Stage ();
         chooseFlight.initModality ( Modality.APPLICATION_MODAL );
         chooseFlight.setTitle ( "Choose Flight" );
@@ -167,7 +173,30 @@ public class SearchFlights {
         flightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn, flightPriceColumn);
         chooseFlight.showAndWait (); });
 
-        return scene;
+        searchFlightStage.setScene ( scene );
+        searchFlightStage.show();
+
+        addFlight.setOnAction ( e-> {
+
+            Flight selectedFlights = flightTableView.getSelectionModel().getSelectedItem();
+
+            Customer.addFlight ( selectedFlights.getFlightId (), Customer.userID );
+
+            chooseFlight.close ();
+
+        } );
+
+        homeButton.setOnAction ( e-> {
+            searchFlightStage.close ();
+        });
+
+        logout.setOnAction ( e ->{
+
+            searchFlightStage.close();
+            MainMenu.close();
+            Driver.logout ();
+        } );
+
     }
 
     public static ObservableList<Flight> getFlight(String fromCity, String toCity, String departDate){   //getFlight(Date filterType)

@@ -10,6 +10,15 @@ public class Customer extends User implements newUser, returningUser {
 
     public static int userID;
     public static int flightID;
+
+    public static int getFlightID() {
+        return flightID;
+    }
+
+    public static void setFlightID(int flightID) {
+        Customer.flightID = flightID;
+    }
+
     public static final String adminPassword = "iluvaria";
     public static boolean adminBool = false;
     public static String fullName = "";
@@ -246,6 +255,16 @@ public class Customer extends User implements newUser, returningUser {
 
                 alert.showAndWait();
             }
+
+            else{
+                Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                alert.setTitle ( "Information" );
+                alert.setHeaderText ( "Flight Booking" );
+                alert.setContentText ( "You've successfully booked this flight!" );
+
+                alert.showAndWait ();
+            }
+
 
 
         }catch (Exception ex){

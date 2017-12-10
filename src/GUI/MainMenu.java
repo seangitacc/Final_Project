@@ -32,6 +32,8 @@ import javafx.stage.Stage;
 
 public class MainMenu {
 
+    static Stage stage = new Stage();
+
     public static void display(){
 
         Label header = new Label("AyrLyne");
@@ -61,15 +63,20 @@ public class MainMenu {
 
        Scene scene = new Scene ( grid,1250,700 );
 
-       Stage stage = new Stage ();
        stage.setTitle ( "AyrLyne" );
-        stage.setScene ( scene );
+       stage.setScene ( scene );
        stage.show();
 
-        searchButton.setOnAction ( e -> stage.setScene(SearchFlights.display ()) );
+        searchButton.setOnAction ( e -> SearchFlights.display () );
 
 
 
+
+    }
+
+    public static void close(){
+
+        stage.close();
     }
 
 
