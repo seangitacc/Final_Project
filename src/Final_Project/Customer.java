@@ -95,6 +95,8 @@ public class Customer extends User implements newUser, returningUser {
                 alert.showAndWait ();
             }
 
+            fullName =  Customer.getName(Customer.userID);
+
 
         }catch (Exception ex){
 

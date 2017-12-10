@@ -46,7 +46,7 @@ public class SearchFlights {
 
         Button homeButton = new Button ( "Home" );
         Button logout = new Button ( "Logout" );
-        Label user = new Label ( "Hello, " + Customer.getName(Customer.userID));
+        Label user = new Label ( "Hello, " + Customer.fullName);
         GridPane grid2 = new GridPane ();
 
         title.setFont ( new Font ( "Helvetica", 36 ) );

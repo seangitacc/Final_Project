@@ -38,7 +38,7 @@ public class MainMenu {
         Button searchButton = new Button("Search Flights");
         Button logout = new Button("Logout");
         Button manageFlights = new Button("Manage All Flights");
-        Label user = new Label("Hello, " + Customer.getName(Customer.userID));
+        Label user = new Label("Hello, " + Customer.fullName);
         GridPane grid = new GridPane ();
 
         grid.setAlignment ( Pos.CENTER );
