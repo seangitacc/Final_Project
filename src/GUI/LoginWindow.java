@@ -45,13 +45,16 @@ public class LoginWindow {
         forgotPassword.setOnAction ( e -> forgotPasswordWindow.display () );
         login.setOnAction ( e -> {
 
-            SearchFlights.display ();
-           /* String username = usernametf.getText ();
+            //SearchFlights.display ();
+
+            String username = usernametf.getText ();
             String password = passwordtf.getText();
             Customer.login ( username,password );
-            */
-           LoginWindow.close();
-           MainMenu.display();
+
+            if(Customer.userID != 0){
+                LoginWindow.close();
+                MainMenu.display();
+            }
 
         } );
 

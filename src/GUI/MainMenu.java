@@ -21,6 +21,7 @@ import javafx.stage.Stage;
  * Created by nikhilpalli on 12/4/17.
  */
 
+import Final_Project.Customer;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,9 +33,9 @@ public class MainMenu {
     public static void display(){
 
         Label header = new Label("AyrLyne");
-        Button searchButton = new Button("SearchFlight");
+        Button searchButton = new Button("Search Flights");
         Button logout = new Button("Logout");
-        Label user = new Label("Hello, <name>");
+        Label user = new Label("Hello, " + Customer.getName(Customer.userID));
         GridPane grid = new GridPane ();
 
 

@@ -1,5 +1,7 @@
 package GUI;
 
+import Final_Project.Customer;
+import Final_Project.Utilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -15,7 +17,12 @@ import javafx.stage.Stage;
 import Final_Project.Flight;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by nikhilpalli on 12/6/17.
@@ -39,13 +46,13 @@ public class SearchFlights {
 
         Button homeButton = new Button ( "Home" );
         Button logout = new Button ( "Logout" );
-        Label user = new Label ( "Hello, <name>" );
+        Label user = new Label ( "Hello, " + Customer.getName(Customer.userID));
         GridPane grid2 = new GridPane ();
 
         title.setFont ( new Font ( "Helvetica", 36 ) );
 
-        from.setPromptText ( "ATL" );
-        to.setPromptText ( "SFO" );
+        from.setPromptText ( "Atlanta (ATL)" );
+        to.setPromptText ( "San Fransisco (SFO)" );
 
         from.getItems ().addAll (
                 "Atlanta (ATL)",
@@ -142,10 +149,6 @@ public class SearchFlights {
         flightIdColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightPrice") );
 
 
-        flightTableView.setItems ( getFlight() );
-
-        flightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn,flightPriceColumn);
-
         Button addFlight = new Button("Add Flight");
         addFlight.setAlignment ( Pos.BOTTOM_RIGHT );
 
@@ -159,45 +162,39 @@ public class SearchFlights {
         chooseFlight.setTitle ( "Choose Flight" );
         chooseFlight.setScene ( scene2 );
 
-
-        search.setOnAction ( e-> chooseFlight.showAndWait () );
+        search.setOnAction ( e-> { flightTableView.setItems ( getFlight(from.getPromptText(), to.getPromptText()));
+        flightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn,flightPriceColumn);
+        chooseFlight.showAndWait (); });
 
         return scene;
     }
 
-    public static ObservableList<Flight> getFlight(){   //getFlight(Date filterType)
+    public static ObservableList<Flight> getFlight(String fromCity, String toCity){   //getFlight(Date filterType)
 
         ObservableList<Flight> flights = FXCollections.observableArrayList ();
 
-        Flight f1 = new Flight();
-        Flight f2 = new Flight();
+        try{
 
-        flights.add (f1);
-        flights.add (f2);
+            PreparedStatement ps = Utilities.connection.prepareStatement
+                    ("SELECT * FROM flights WHERE from_city " + "= ?" +
+                            "AND to_city " + "= ?");
+            ps.setString(1, fromCity);
+            ps.setString(2, toCity);
+            //ps.setString(3,date);
+            ResultSet count = ps.executeQuery();
+
+            while(count.next()){
+
+                flights.add(new Flight(Integer.parseInt(count.getString(1)), count.getString(2), count.getString(3),
+                        count.getString(4), count.getString(5), Double.parseDouble(count.getString(6))));
+            }
+
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
 
 
         return flights;
-
-        //use sql count function to get number of flights for the date, fromCity, and toCity
-
-        /*PreparedStatement ps = Utilities.connection.prepareStatement
-                ("SELECT * FROM flights WHERE + " + toCity + " = ?" + " + fromCity + " = ?" + " + date + " = ?"), ;
-        ps.setString(1, filter);
-        ResultSet count = ps.executeQuery();
-
-
-
-        //populate data.
-
-
-
-            /*PreparedStatement ps = Utilities.connection.prepareStatement
-                ("SELECT * FROM flights WHERE + " + filterType + " = ?");
-        ps.setString(1, filter);
-        ResultSet rs = ps.executeQuery();
-          */
-
-
 
     }
 

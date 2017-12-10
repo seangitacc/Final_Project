@@ -12,6 +12,7 @@ public class Customer extends User implements newUser, returningUser {
     public static int flightID;
     public static final String adminPassword = "iluvaria";
     public static boolean adminBool = false;
+    public static String fullName = "";
 
 
     public static void register(String firstName, String lastName, String addressLine, String zipcode, String state, String username, String password, String email, String ssn, String secQuestion, String secAnswer){
@@ -272,6 +273,31 @@ public class Customer extends User implements newUser, returningUser {
         }catch(Exception ex){
             System.out.println(ex);
         }
+    }
+
+    public static String getName(int userID){
+
+        try {
+
+            PreparedStatement ps = Utilities.connection.prepareStatement
+                    ("SELECT firstName, lastName from users where user_id = ?" );
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+
+                fullName += rs.getString(1);
+                fullName += " " + rs.getString(2);
+
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+
+        return fullName;
+
     }
 
 }

@@ -8,7 +8,7 @@ public class Utilities {
 
     static String user = "root";
     static String passwd = "gr8isc00l";
-    static Connection connection;
+    public static Connection connection;
     static Statement statement;
 
     public static void createConnnection(){
