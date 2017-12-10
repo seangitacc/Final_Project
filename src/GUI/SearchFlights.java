@@ -75,8 +75,7 @@ public class SearchFlights {
         );
 
 
-        departDate.setPromptText ( "Date of Departure" );
-        arriveDate.setPromptText ( "Date of Return" );
+        departDate.setPromptText ( "" + LocalDate.now() );
 
         departDate.setMaxSize ( 200, 10 );
         arriveDate.setMaxSize ( 200, 10 );
@@ -162,14 +161,16 @@ public class SearchFlights {
         chooseFlight.setTitle ( "Choose Flight" );
         chooseFlight.setScene ( scene2 );
 
-        search.setOnAction ( e-> { flightTableView.setItems ( getFlight(from.getPromptText(), to.getPromptText()));
+        DateTimeFormatter dt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        search.setOnAction ( e-> { flightTableView.setItems ( getFlight(from.getPromptText(), to.getPromptText(), departDate.getValue().format(dt1)));
         flightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn, flightPriceColumn);
         chooseFlight.showAndWait (); });
 
         return scene;
     }
 
-    public static ObservableList<Flight> getFlight(String fromCity, String toCity){   //getFlight(Date filterType)
+    public static ObservableList<Flight> getFlight(String fromCity, String toCity, String departDate){   //getFlight(Date filterType)
 
         ObservableList<Flight> flights = FXCollections.observableArrayList ();
 
@@ -177,10 +178,10 @@ public class SearchFlights {
 
             PreparedStatement ps = Utilities.connection.prepareStatement
                     ("SELECT * FROM flights WHERE from_city " + "= ?" +
-                            "AND to_city " + "= ?");
+                            "AND to_city " + "= ?" + "AND flight_date " + "=?");
             ps.setString(1, fromCity);
             ps.setString(2, toCity);
-            //ps.setString(3,date);
+            ps.setString(3, departDate);
             ResultSet count = ps.executeQuery();
 
             while(count.next()){
