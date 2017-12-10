@@ -13,30 +13,56 @@ public class Customer extends User implements newUser, returningUser {
     public static final String adminPassword = "iluvaria";
     public static boolean adminBool = false;
     public static String fullName = "";
-
+    public static int adminCheck;
 
     public static void register(String firstName, String lastName, String addressLine, String zipcode, String state, String username, String password, String email, String ssn, String secQuestion, String secAnswer){
 
         try {
 
-            String query = "INSERT INTO users " + "(username, password, firstName, lastName, addressLine, zipcode, state, email, ssn, secQuestion, secAnswer) VALUES " +
-                    "(?,?,?,?,?,?,?,?,?,?,?)";
+            if(!(Customer.adminBool)){
 
-            PreparedStatement ps = Utilities.connection.prepareStatement(query);
+                String query = "INSERT INTO users " + "(username, password, firstName, lastName, addressLine, zipcode, state, email, ssn, secQuestion, secAnswer) VALUES " +
+                        "(?,?,?,?,?,?,?,?,?,?,?)";
 
-            ps.setString(1, username);
-            ps.setString(2, password);
-            ps.setString(3, firstName);
-            ps.setString(4, lastName);
-            ps.setString(5, addressLine);
-            ps.setString(6, zipcode);
-            ps.setString(7, state);
-            ps.setString(8, email);
-            ps.setString(9, ssn);
-            ps.setString(10, secQuestion);
-            ps.setString(11, secAnswer);
+                PreparedStatement ps = Utilities.connection.prepareStatement(query);
 
-            ps.execute();
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ps.setString(3, firstName);
+                ps.setString(4, lastName);
+                ps.setString(5, addressLine);
+                ps.setString(6, zipcode);
+                ps.setString(7, state);
+                ps.setString(8, email);
+                ps.setString(9, ssn);
+                ps.setString(10, secQuestion);
+                ps.setString(11, secAnswer);
+
+                ps.execute();
+
+            }else{
+
+                String query = "INSERT INTO users " + "(username, password, firstName, lastName, addressLine, zipcode, state, email, ssn, secQuestion, secAnswer, isAdmin) VALUES " +
+                        "(?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                PreparedStatement ps = Utilities.connection.prepareStatement(query);
+
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ps.setString(3, firstName);
+                ps.setString(4, lastName);
+                ps.setString(5, addressLine);
+                ps.setString(6, zipcode);
+                ps.setString(7, state);
+                ps.setString(8, email);
+                ps.setString(9, ssn);
+                ps.setString(10, secQuestion);
+                ps.setString(11, secAnswer);
+                ps.setInt(12, 1);
+
+                ps.execute();
+
+            }
 
         }catch (Exception ex){
 
@@ -51,7 +77,7 @@ public class Customer extends User implements newUser, returningUser {
         try{
 
             PreparedStatement ps = Utilities.connection.prepareStatement
-                            ("SELECT user_id FROM users WHERE username = ? AND password = ?");
+                            ("SELECT user_id, isAdmin FROM users WHERE username = ? AND password = ?");
             ps.setString (1, username);
             ps.setString (2, password);
             ResultSet rs = ps.executeQuery();
@@ -59,6 +85,7 @@ public class Customer extends User implements newUser, returningUser {
             if (rs.next()) {
                 System.out.println("Nice!");
                 userID = rs.getInt(1);
+                adminCheck = rs.getInt(2);
             } else {
                 Alert alert = new Alert( Alert.AlertType.ERROR);
                 alert.setTitle ( "Warning" );

@@ -133,20 +133,20 @@ public class SearchFlights {
         fromCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("fromCity") );
 
         TableColumn<Flight, String> toCityColumn = new TableColumn<Flight, String> ( "Arrival City" );
-        fromCityColumn.setPrefWidth ( 200 );
-        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("toCity") );
+        toCityColumn.setPrefWidth ( 200 );
+        toCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("toCity") );
 
         TableColumn<Flight, String> flightDateColumn = new TableColumn<Flight, String> ( "Departure Date" );
-        fromCityColumn.setPrefWidth ( 200 );
-        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("flightDate") );
+        flightDateColumn.setPrefWidth ( 200 );
+        flightDateColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("flightDate") );
 
         TableColumn<Flight, String> flightTimeColumn = new TableColumn<Flight, String> ( "Flight Time" );
-        flightIdColumn.setPrefWidth ( 200 );
-        flightIdColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightTime") );
+        flightTimeColumn.setPrefWidth ( 200 );
+        flightTimeColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightTime") );
 
         TableColumn<Flight, Double> flightPriceColumn = new TableColumn<Flight, Double> ( "Price" );
-        flightIdColumn.setPrefWidth ( 100 );
-        flightIdColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightPrice") );
+        flightPriceColumn.setPrefWidth ( 100 );
+        flightPriceColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightPrice") );
 
 
         Button addFlight = new Button("Add Flight");

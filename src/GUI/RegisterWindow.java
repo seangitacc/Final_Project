@@ -79,7 +79,7 @@ public class RegisterWindow {
                                 alert.setTitle("Information");
                                 alert.setHeaderText("Correct password!");
                                 alert.setContentText("Welcome, administrator!");
-
+                                Customer.adminBool = true;
                                 alert.showAndWait();
 
 

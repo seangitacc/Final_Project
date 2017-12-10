@@ -35,6 +35,7 @@ public class MainMenu {
         Label header = new Label("AyrLyne");
         Button searchButton = new Button("Search Flights");
         Button logout = new Button("Logout");
+        Button manageFlights = new Button("Manage Flights");
         Label user = new Label("Hello, " + Customer.getName(Customer.userID));
         GridPane grid = new GridPane ();
 
@@ -44,7 +45,12 @@ public class MainMenu {
         GridPane.setConstraints ( searchButton,0,5 );
         GridPane.setConstraints ( logout,0,7 );
 
-        grid.getChildren ().addAll ( header,user,searchButton,logout );
+        if(Customer.adminCheck == 1){
+            GridPane.setConstraints(manageFlights, 0 ,9);
+            grid.getChildren().add(manageFlights);
+        }
+
+        grid.getChildren ().addAll ( header,user,searchButton,logout);
 
        Scene scene = new Scene ( grid,1250,700 );
 
