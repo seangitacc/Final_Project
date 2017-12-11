@@ -1,6 +1,6 @@
 package Final_Project;
 
-public interface returningUser {
+interface returningUser {
 
     static void login(){
 

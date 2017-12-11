@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class EntryWindow {
 
-    static Stage EntryWindow = new Stage ();
+    private static final Stage EntryWindow = new Stage ();
 
     public static void display(){
 
@@ -29,9 +28,7 @@ public class EntryWindow {
         javafx.scene.control.Button loginButton = new javafx.scene.control.Button("Click to Login!");
         javafx.scene.control.Button registerButton = new Button ("Click to Register!");
 
-        loginButton.setOnAction ( e -> {
-            LoginWindow.display ();
-        } );
+        loginButton.setOnAction ( e -> LoginWindow.display ());
         registerButton.setOnAction ( e -> RegisterWindow.dispaly () );
 
         VBox vb = new VBox(20);

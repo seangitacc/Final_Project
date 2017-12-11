@@ -1,18 +1,11 @@
 package GUI;
 
 import Final_Project.Customer;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.*;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -21,7 +14,7 @@ import java.util.Optional;
 /**
  * Created by nikhilpalli on 12/1/17.
  */
-public class RegisterWindow {
+class RegisterWindow {
 
     public static void dispaly() {
 
@@ -72,9 +65,8 @@ public class RegisterWindow {
                         dialog.setContentText("Enter Master Password: ");
 
                         Optional<String> result = dialog.showAndWait();
-                        if(result.isPresent()) {
-
-                            if (result.get().equals(Customer.adminPassword)) {
+                        result.ifPresent(s -> {
+                            if (s.equals(Customer.adminPassword)) {
 
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("Information");
@@ -82,7 +74,7 @@ public class RegisterWindow {
                                 alert.setContentText("Welcome, administrator!");
                                 Customer.adminBool = true;
                                 alert.showAndWait();
-                            }else{
+                            } else {
                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                 alert.setTitle("Error");
                                 alert.setHeaderText("Invalid Password!");
@@ -92,8 +84,7 @@ public class RegisterWindow {
 
                                 adminCheck.setSelected(false);
                             }
-
-                        }
+                        });
                         adminCheck.setSelected( Customer.adminBool);
                     }
 

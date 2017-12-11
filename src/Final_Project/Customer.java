@@ -11,8 +11,7 @@ import java.sql.SQLWarning;
 public class Customer extends User implements newUser, returningUser {
 
     public static int userID;
-    public static int flightID;
-    private static int seatCount = 0;
+    static int flightID;
     public static final String adminPassword = "iluvaria";
     public static boolean adminBool = false;
     public static String fullName = "";
@@ -69,7 +68,14 @@ public class Customer extends User implements newUser, returningUser {
 
         }catch (Exception ex){
 
-            System.out.println(ex);
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
 
         }
 
@@ -86,7 +92,6 @@ public class Customer extends User implements newUser, returningUser {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                System.out.println("Nice!");
                 userID = rs.getInt(1);
                 adminCheck = rs.getInt(2);
             } else {
@@ -103,7 +108,14 @@ public class Customer extends User implements newUser, returningUser {
 
         }catch (Exception ex){
 
-            System.out.println(ex);
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
 
         }
 
@@ -126,7 +138,14 @@ public class Customer extends User implements newUser, returningUser {
 
         }catch (Exception ex){
 
-            System.out.println(ex);
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
 
         }
 
@@ -153,7 +172,14 @@ public class Customer extends User implements newUser, returningUser {
 
         }catch (Exception ex){
 
-            System.out.println(ex);
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
 
         }
 
@@ -191,7 +217,14 @@ public class Customer extends User implements newUser, returningUser {
 
         } catch (Exception ex) {
 
-            System.out.println(ex);
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
 
         }
 
@@ -223,12 +256,13 @@ public class Customer extends User implements newUser, returningUser {
                 int flightsCount = rs.getInt(3);
                 boolean ignore = false;
 
-                for (int i = 0; i < flights.size(); i++) {
-                    if (flights.get(i).getFlightDate().equals(flightDate) || flights.get(i).getFlightTime().equals(flightTime)) {
+                for (Flight flight : flights) {
+                    if (flight.getFlightDate().equals(flightDate) || flight.getFlightTime().equals(flightTime)) {
                         ignore = true;
                     }
                 }
 
+                int seatCount = 0;
                 if (ignore){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Warning");
@@ -275,7 +309,16 @@ public class Customer extends User implements newUser, returningUser {
                 }
 
         }catch (Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
     }
 
@@ -307,7 +350,16 @@ public class Customer extends User implements newUser, returningUser {
 
 
         }catch (Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
     }
 
@@ -334,14 +386,23 @@ public class Customer extends User implements newUser, returningUser {
             }
 
         }catch (Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
 
 
         return flights;
     }
 
-    public static String getName(int userID){
+    private static String getName(int userID){
 
         try {
 
@@ -359,7 +420,16 @@ public class Customer extends User implements newUser, returningUser {
 
 
         }catch(Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
 
         return fullName;

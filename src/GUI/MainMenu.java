@@ -39,9 +39,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class MainMenu {
+class MainMenu {
 
-    static Stage stage = new Stage();
+    private static final Stage stage = new Stage();
 
     public static void display(){
 
@@ -82,27 +82,27 @@ public class MainMenu {
 
         searchButton.setOnAction ( e -> SearchFlights.display () );
 
-        TableColumn<Flight, Integer> flightIdColumn = new TableColumn<Flight, Integer> ( "Flight ID" );
+        TableColumn<Flight, Integer> flightIdColumn = new TableColumn<>("Flight ID");
         flightIdColumn.setPrefWidth( 100 );
-        flightIdColumn.setCellValueFactory ( new PropertyValueFactory<Flight, Integer>("flightId") );
+        flightIdColumn.setCellValueFactory (new PropertyValueFactory<>("flightId") );
 
-        TableColumn<Flight, String> fromCityColumn = new TableColumn<Flight, String> ( "Departure City" );
+        TableColumn<Flight, String> fromCityColumn = new TableColumn<>("Departure City");
         fromCityColumn.setPrefWidth ( 200 );
-        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("fromCity") );
+        fromCityColumn.setCellValueFactory (new PropertyValueFactory<>("fromCity") );
 
-        TableColumn<Flight, String> toCityColumn = new TableColumn<Flight, String> ( "Arrival City" );
+        TableColumn<Flight, String> toCityColumn = new TableColumn<>("Arrival City");
         toCityColumn.setPrefWidth ( 200 );
-        toCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("toCity") );
+        toCityColumn.setCellValueFactory (new PropertyValueFactory<>("toCity") );
 
-        TableColumn<Flight, String> flightDateColumn = new TableColumn<Flight, String> ( "Departure Date" );
+        TableColumn<Flight, String> flightDateColumn = new TableColumn<>("Departure Date");
         flightDateColumn.setPrefWidth ( 200 );
-        flightDateColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("flightDate") );
+        flightDateColumn.setCellValueFactory (new PropertyValueFactory<>("flightDate") );
 
-        TableColumn<Flight, String> flightTimeColumn = new TableColumn<Flight, String> ( "Flight Time" );
+        TableColumn<Flight, String> flightTimeColumn = new TableColumn<>("Flight Time");
         flightTimeColumn.setPrefWidth ( 200 );
         flightTimeColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightTime") );
 
-        TableColumn<Flight, Double> flightPriceColumn = new TableColumn<Flight, Double> ( "Price" );
+        TableColumn<Flight, Double> flightPriceColumn = new TableColumn<>("Price");
         flightPriceColumn.setPrefWidth ( 100 );
         flightPriceColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightPrice") );
 
@@ -155,9 +155,7 @@ public class MainMenu {
             Driver.logout ();
         } );
 
-        manageFlights.setOnAction ( e-> {
-            ManageAllFlights.display ();
-        } );
+        manageFlights.setOnAction ( e-> ManageAllFlights.display ());
 
         stage.show();
     }

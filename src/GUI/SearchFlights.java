@@ -3,7 +3,6 @@ package GUI;
 import Final_Project.Customer;
 import Final_Project.Driver;
 import Final_Project.Utilities;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -18,11 +17,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import Final_Project.Flight;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -30,7 +26,7 @@ import java.time.format.DateTimeFormatter;
  * Created by nikhilpalli on 12/6/17.
  */
 
-public class SearchFlights {
+class SearchFlights {
 
     public static void display() {
 
@@ -63,7 +59,7 @@ public class SearchFlights {
                 "Atlanta (ATL)",
                 "San Fransisco (SFO)",
                 "St. Louis (STL)",
-                "New York (NYC)",
+                "New York (JFK)",
                 "Dallas (DFW)",
                 "Chicago (ORD)"
                 //use database to populate
@@ -72,7 +68,7 @@ public class SearchFlights {
                 "Atlanta (ATL)",
                 "San Fransisco (SFO)",
                 "St. Louis (STL)",
-                "New York (NYC)",
+                "New York (JFK)",
                 "Dallas (DFW)",
                 "Chicago (ORD)"
 
@@ -126,27 +122,27 @@ public class SearchFlights {
         Scene scene = new Scene ( vb, 1250, 700 );
 
 
-        TableColumn<Flight, Integer> flightIdColumn = new TableColumn<Flight, Integer> ( "Flight ID" );
+        TableColumn<Flight, Integer> flightIdColumn = new TableColumn<>("Flight ID");
         flightIdColumn.setPrefWidth( 100 );
-        flightIdColumn.setCellValueFactory ( new PropertyValueFactory<Flight, Integer> ("flightId") );
+        flightIdColumn.setCellValueFactory (new PropertyValueFactory<>("flightId") );
 
-        TableColumn<Flight, String> fromCityColumn = new TableColumn<Flight, String> ( "Departure City" );
+        TableColumn<Flight, String> fromCityColumn = new TableColumn<>("Departure City");
         fromCityColumn.setPrefWidth ( 200 );
-        fromCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("fromCity") );
+        fromCityColumn.setCellValueFactory (new PropertyValueFactory<>("fromCity") );
 
-        TableColumn<Flight, String> toCityColumn = new TableColumn<Flight, String> ( "Arrival City" );
+        TableColumn<Flight, String> toCityColumn = new TableColumn<>("Arrival City");
         toCityColumn.setPrefWidth ( 200 );
-        toCityColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("toCity") );
+        toCityColumn.setCellValueFactory (new PropertyValueFactory<>("toCity") );
 
-        TableColumn<Flight, String> flightDateColumn = new TableColumn<Flight, String> ( "Departure Date" );
+        TableColumn<Flight, String> flightDateColumn = new TableColumn<>("Departure Date");
         flightDateColumn.setPrefWidth ( 200 );
-        flightDateColumn.setCellValueFactory ( new PropertyValueFactory<Flight, String> ("flightDate") );
+        flightDateColumn.setCellValueFactory (new PropertyValueFactory<>("flightDate") );
 
-        TableColumn<Flight, String> flightTimeColumn = new TableColumn<Flight, String> ( "Flight Time" );
+        TableColumn<Flight, String> flightTimeColumn = new TableColumn<>("Flight Time");
         flightTimeColumn.setPrefWidth ( 200 );
         flightTimeColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightTime") );
 
-        TableColumn<Flight, Double> flightPriceColumn = new TableColumn<Flight, Double> ( "Price" );
+        TableColumn<Flight, Double> flightPriceColumn = new TableColumn<>("Price");
         flightPriceColumn.setPrefWidth ( 100 );
         flightPriceColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightPrice") );
 
@@ -211,9 +207,7 @@ public class SearchFlights {
 
         } );
 
-        homeButton.setOnAction ( e-> {
-            searchFlightStage.close ();
-        });
+        homeButton.setOnAction ( e-> searchFlightStage.close ());
 
         logout.setOnAction ( e ->{
 
@@ -224,7 +218,7 @@ public class SearchFlights {
 
     }
 
-    public static ObservableList<Flight> getFlight(String fromCity, String toCity, String departDate){
+    private static ObservableList<Flight> getFlight(String fromCity, String toCity, String departDate){
 
         ObservableList<Flight> flights = FXCollections.observableArrayList ();
 
@@ -245,7 +239,16 @@ public class SearchFlights {
             }
 
         }catch (Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
 
 

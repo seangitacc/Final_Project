@@ -4,7 +4,6 @@ import Final_Project.Admin;
 import Final_Project.Customer;
 import Final_Project.Driver;
 import Final_Project.Flight;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,18 +13,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import sun.awt.image.GifImageDecoder;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 /**
  * Created by nikhilpalli on 12/10/17.
  */
-public class ManageAllFlights {
+class ManageAllFlights {
 
-    static Stage manageFlightStage = new Stage ();
+    private static final Stage manageFlightStage = new Stage ();
 
     public static void display(){
 
@@ -79,11 +76,7 @@ public class ManageAllFlights {
        manageFlightStage.setScene (scene);
        manageFlightStage.show ();
 
-        homeButton.setOnAction ( e-> {
-
-            manageFlightStage.close();
-
-        });
+        homeButton.setOnAction ( e-> manageFlightStage.close());
 
         logout.setOnAction ( e ->{
 
@@ -109,8 +102,19 @@ public class ManageAllFlights {
            s1.show();
 
             del.setOnAction ( e1 ->{
-                Admin.deleteFlight ( flightInput.getText () );
-                s1.close();
+
+                if(flightInput.getText().matches("[A-Za-z]")){
+                    Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                    alert.setTitle ( "Information" );
+                    alert.setHeaderText ( "Invalid Input" );
+                    alert.setContentText ( "You must enter a number!" );
+
+                    alert.showAndWait ();
+                }else {
+                    Admin.deleteFlight ( flightInput.getText () );
+                    s1.close();
+                }
+
             } );
         } );
 
@@ -139,7 +143,7 @@ public class ManageAllFlights {
                     "Atlanta (ATL)",
                     "San Fransisco (SFO)",
                     "St. Louis (STL)",
-                    "New York (NYC)",
+                    "New York (JFK)",
                     "Dallas (DFW)",
                     "Chicago (ORD)"
 
@@ -148,7 +152,7 @@ public class ManageAllFlights {
                     "Atlanta (ATL)",
                     "San Fransisco (SFO)",
                     "St. Louis (STL)",
-                    "New York (NYC)",
+                    "New York (JFK)",
                     "Dallas (DFW)",
                     "Chicago (ORD)"
             );
@@ -188,7 +192,7 @@ public class ManageAllFlights {
                         Alert alert = new Alert ( Alert.AlertType.INFORMATION );
                         alert.setTitle ( "Information" );
                         alert.setHeaderText ( "Flight Creation" );
-                        alert.setContentText ( "You've cannot have any null values!" );
+                        alert.setContentText ( "You must enter the correct input for each field!" );
 
                         alert.showAndWait ();
 
@@ -220,97 +224,109 @@ public class ManageAllFlights {
 
             upd.setOnAction (e3->{
 
-                Flight f1 = Admin.searchUpdateFlights(Integer.parseInt(flightInput.getText()));
-
-                if(f1.getFlightId() == 0){
+                if(flightInput.getText().matches("[A-Za-z]")){
                     Alert alert = new Alert ( Alert.AlertType.INFORMATION );
                     alert.setTitle ( "Information" );
-                    alert.setHeaderText ( "Flight Search" );
-                    alert.setContentText ( "That flight does not exist!" );
+                    alert.setHeaderText ( "Invalid Input" );
+                    alert.setContentText ( "You must enter a number!" );
 
                     alert.showAndWait ();
+                }else {
 
-                }else{
+                    Flight f1 = Admin.searchUpdateFlights(Integer.parseInt(flightInput.getText()));
 
-                    Label ti= new Label("Flight Id: \t\t\t\t\t\t\t" + f1.getFlightId());
-                    Label fromL = new Label ( "From " );
-                    Label toL = new Label ( "To " );
-                    ComboBox<String> from = new ComboBox ();
-                    ComboBox<String> to = new ComboBox ();
-                    Label departtf = new Label ( "Date of Departure" );
-                    LocalDate flightDate = LocalDate.parse(f1.getFlightDate());
-                    DatePicker departDate = new DatePicker (flightDate);
-                    Label flightTime = new Label("Flight Time");
-                    TextField ftInput = new TextField (f1.getFlightTime());
-                    Label flightPrice = new Label("Flight Price");
-                    TextField fpInput = new TextField ("" + f1.getFlightPrice());
-                    Button updateF = new Button("Update Flight");
+                    if (f1.getFlightId() == 0) {
 
-                    from.getItems ().addAll (
-                            "Atlanta (ATL)",
-                            "San Fransisco (SFO)",
-                            "St. Louis (STL)",
-                            "New York (NYC)",
-                            "Dallas (DFW)",
-                            "Chicago (ORD)"
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Information");
+                        alert.setHeaderText("Flight Search");
+                        alert.setContentText("That flight does not exist!");
 
-                    );
-                    to.getItems ().addAll (
-                            "Atlanta (ATL)",
-                            "San Fransisco (SFO)",
-                            "St. Louis (STL)",
-                            "New York (NYC)",
-                            "Dallas (DFW)",
-                            "Chicago (ORD)"
-                    );
+                        alert.showAndWait();
 
-                    from.setPromptText (f1.getFromCity());
-                    to.setPromptText (f1.getToCity());
+                    } else {
 
-                    GridPane.setConstraints (ti,0,0  );
-                    GridPane.setConstraints (fromL,0,1  );
-                    GridPane.setConstraints ( from, 1,1 );
-                    GridPane.setConstraints ( toL, 0,2 );
-                    GridPane.setConstraints ( to,1,2 );
-                    GridPane.setConstraints ( departtf,0,3 );
-                    GridPane.setConstraints ( departDate,1,3 );
-                    GridPane.setConstraints ( flightTime,0,4 );
-                    GridPane.setConstraints ( ftInput,1,4 );
-                    GridPane.setConstraints ( flightPrice,0,5 );
-                    GridPane.setConstraints ( fpInput,1,5 );
-                    GridPane.setConstraints ( updateF,1,6 );
+                        Label ti = new Label("Flight Id: \t\t\t\t\t\t\t" + f1.getFlightId());
+                        Label fromL = new Label("From ");
+                        Label toL = new Label("To ");
+                        ComboBox<String> from = new ComboBox();
+                        ComboBox<String> to = new ComboBox();
+                        Label departtf = new Label("Date of Departure");
+                        LocalDate flightDate = LocalDate.parse(f1.getFlightDate());
+                        DatePicker departDate = new DatePicker(flightDate);
+                        Label flightTime = new Label("Flight Time");
+                        TextField ftInput = new TextField(f1.getFlightTime());
+                        Label flightPrice = new Label("Flight Price");
+                        TextField fpInput = new TextField("" + f1.getFlightPrice());
+                        Button updateF = new Button("Update Flight");
 
-                    GridPane grid3 = new GridPane ();
-                    grid3.setAlignment ( Pos.CENTER );
-                    grid3.setVgap ( 10 );
-                    grid3.setHgap ( 25 );
-                    grid3.getChildren ().addAll (ti,fromL,from,toL,to,departtf,departDate,flightTime,ftInput,flightPrice,fpInput,updateF  );
+                        from.getItems().addAll(
+                                "Atlanta (ATL)",
+                                "San Fransisco (SFO)",
+                                "St. Louis (STL)",
+                                "New York (JFK)",
+                                "Dallas (DFW)",
+                                "Chicago (ORD)"
 
-                    Scene scene2 = new Scene ( grid3,650,500 );
-                    Stage s2 = new Stage (  );
-                    s2.setTitle ( "Update Flight" );
-                    s2.setScene ( scene2 );
+                        );
+                        to.getItems().addAll(
+                                "Atlanta (ATL)",
+                                "San Fransisco (SFO)",
+                                "St. Louis (STL)",
+                                "New York (JFK)",
+                                "Dallas (DFW)",
+                                "Chicago (ORD)"
+                        );
 
-                    s2.show();
-                    s1.close();
+                        from.setPromptText(f1.getFromCity());
+                        to.setPromptText(f1.getToCity());
 
-                    DateTimeFormatter dt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        GridPane.setConstraints(ti, 0, 0);
+                        GridPane.setConstraints(fromL, 0, 1);
+                        GridPane.setConstraints(from, 1, 1);
+                        GridPane.setConstraints(toL, 0, 2);
+                        GridPane.setConstraints(to, 1, 2);
+                        GridPane.setConstraints(departtf, 0, 3);
+                        GridPane.setConstraints(departDate, 1, 3);
+                        GridPane.setConstraints(flightTime, 0, 4);
+                        GridPane.setConstraints(ftInput, 1, 4);
+                        GridPane.setConstraints(flightPrice, 0, 5);
+                        GridPane.setConstraints(fpInput, 1, 5);
+                        GridPane.setConstraints(updateF, 1, 6);
 
-                    updateF.setOnAction( e2 -> {
-                        if(from.getValue() == null && to.getValue() == null){
-                            Admin.updateFlight(f1.getFromCity(), f1.getToCity(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
-                        }else if(from.getValue() == null){
-                            Admin.updateFlight(f1.getFromCity(), to.getValue(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
-                        }else if(to.getValue() == null){
-                            Admin.updateFlight(from.getValue(), f1.getToCity(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
-                        }else{
-                            Admin.updateFlight(from.getValue(), to.getValue(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
-                        }
+                        GridPane grid3 = new GridPane();
+                        grid3.setAlignment(Pos.CENTER);
+                        grid3.setVgap(10);
+                        grid3.setHgap(25);
+                        grid3.getChildren().addAll(ti, fromL, from, toL, to, departtf, departDate, flightTime, ftInput, flightPrice, fpInput, updateF);
 
-                        s2.close();
+                        Scene scene2 = new Scene(grid3, 650, 500);
+                        Stage s2 = new Stage();
+                        s2.setTitle("Update Flight");
+                        s2.setScene(scene2);
 
-                    });
+                        s2.show();
+                        s1.close();
 
+                        DateTimeFormatter dt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                        updateF.setOnAction(e2 -> {
+                            if (from.getValue() == null && to.getValue() == null) {
+                                Admin.updateFlight(f1.getFromCity(), f1.getToCity(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
+                            } else if (from.getValue() == null) {
+                                Admin.updateFlight(f1.getFromCity(), to.getValue(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
+                            } else if (to.getValue() == null) {
+                                Admin.updateFlight(from.getValue(), f1.getToCity(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
+                            } else {
+                                Admin.updateFlight(from.getValue(), to.getValue(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
+                            }
+
+                            s2.close();
+
+                        });
+
+
+                    }
 
                 }
 

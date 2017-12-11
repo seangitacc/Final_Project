@@ -1,15 +1,17 @@
 package Final_Project;
 
+import javafx.scene.control.Alert;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class Utilities {
 
-    static String user = "root";
-    static String passwd = "gr8isc00l";
+    private static final String user = "root";
+    private static final String passwd = "gr8isc00l";
     public static Connection connection;
-    static Statement statement;
+    private static Statement statement;
 
     public static void createConnnection(){
 
@@ -21,7 +23,15 @@ public class Utilities {
 
         }catch(Exception ex){
 
-            System.out.println(ex);
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
 
     }
@@ -34,7 +44,14 @@ public class Utilities {
 
         }catch(Exception ex){
 
-            System.out.println(ex);
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
 
         }
 

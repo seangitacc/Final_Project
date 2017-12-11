@@ -1,6 +1,6 @@
 package Final_Project;
 
-public abstract class User {
+abstract class User {
 
     private String firstName;
     private String lastName;

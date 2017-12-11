@@ -1,7 +1,5 @@
 package Final_Project;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
@@ -22,8 +20,6 @@ public class Admin extends Customer {
 
             ps.execute();
 
-            ps.getWarnings ();
-
             String incrementQuery = "UPDATE flights\n" +
                     "SET flights_seats = flights_seats + 1\n" +
                     "Where flight_id = ?";
@@ -40,7 +36,16 @@ public class Admin extends Customer {
 
 
         }catch (Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
     }
 
@@ -68,7 +73,16 @@ public class Admin extends Customer {
 
 
         }catch (Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
 
     }
@@ -94,7 +108,16 @@ public class Admin extends Customer {
             }
 
         }catch (Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
 
         return f1;
@@ -133,7 +156,16 @@ public class Admin extends Customer {
 
 
         }catch (Exception ex){
-            System.out.println(ex);
+
+            ex.printStackTrace();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
         }
 
     }

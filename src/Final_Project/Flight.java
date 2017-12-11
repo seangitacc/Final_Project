@@ -3,11 +3,6 @@ package Final_Project;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import sun.java2d.pipe.SpanShapeRenderer;
-
-import java.sql.Date;
-import java.sql.Time;
 
 /**
  * Created by nikhilpalli on 12/6/17.
