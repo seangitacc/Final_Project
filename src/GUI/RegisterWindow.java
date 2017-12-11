@@ -93,19 +93,7 @@ public class RegisterWindow {
                                 adminCheck.setSelected(false);
                             }
 
-                        }/*else {
-
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setTitle("Error");
-                                alert.setHeaderText("Invalid Password!");
-                                alert.setContentText("We will now uncheck the admin box for you.");
-
-                                alert.showAndWait();
-
-                                adminCheck.setSelected(false);
-
-                            }
-*/
+                        }
                         adminCheck.setSelected( Customer.adminBool);
                     }
 

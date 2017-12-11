@@ -3,6 +3,7 @@ package GUI;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,9 +23,9 @@ public class EntryWindow {
         EntryWindow.setTitle ( "Ayrlyne" );
         EntryWindow.setMinHeight ( 250 );
 
-
-        javafx.scene.control.Label welcomeMessage = new javafx.scene.control.Label( "Welcome to Ayrlyne!" );
+        Label welcomeMessage = new Label( "Welcome to Ayrlyne!" );
         welcomeMessage.setFont(new Font ("Helvetica", 48));
+        welcomeMessage.setStyle ( "-fx-text-fill: e8e8e8" );
         javafx.scene.control.Button loginButton = new javafx.scene.control.Button("Click to Login!");
         javafx.scene.control.Button registerButton = new Button ("Click to Register!");
 
@@ -44,9 +45,9 @@ public class EntryWindow {
         hb.setAlignment ( Pos.CENTER );
 
 
-        entryScene = new Scene ( vb , 1250  ,  700, Color.rgb ( 200,150,26 ));
+        entryScene = new Scene ( vb , 1250  ,  700);
 
-
+        entryScene.getStylesheets ().add ( "Theme.css" );
 
         EntryWindow.setScene ( entryScene );
 
