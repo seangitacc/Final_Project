@@ -100,5 +100,43 @@ public class Admin extends Customer {
         return f1;
     }
 
+    public static void updateFlight(String fromCity, String toCity, String departDate, String flightTime, String flightPrice, int flightId){
+
+        System.out.println(fromCity);
+
+        try{
+
+            String query = "UPDATE flights\n" +
+                    "SET from_city = ?,\n" +
+                    "to_city = ?,\n" +
+                    "flight_date = ?,\n" +
+                    "flight_time = ?,\n" +
+                    "flight_price = ?\n" +
+                    "where flight_id = ?";
+            PreparedStatement ps = Utilities.connection.prepareStatement(query);
+
+            ps.setString(1, fromCity);
+            ps.setString(2, toCity);
+            ps.setString(3, departDate);
+            ps.setString(4, flightTime);
+            ps.setString(5, flightPrice);
+            ps.setInt(6, flightId);
+
+            ps.executeUpdate();
+
+            Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+            alert.setTitle ( "Information" );
+            alert.setHeaderText ( "Flight Update" );
+            alert.setContentText ( "You've successfully updated this flight!" );
+
+            alert.showAndWait ();
+
+
+        }catch (Exception ex){
+            System.out.println(ex);
+        }
+
+    }
+
 
 }

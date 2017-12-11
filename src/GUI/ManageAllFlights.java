@@ -182,8 +182,6 @@ public class ManageAllFlights {
 
             DateTimeFormatter dt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-
-
                 addNew.setOnAction(e2 -> {
                     if(from.getValue() == null || to.getValue() == null || departDate.getValue() == null || ftInput.getText() == null || fpInput.getText() == null) {
 
@@ -197,6 +195,7 @@ public class ManageAllFlights {
                     }else {
 
                         Admin.addNewFlight(from.getValue(), to.getValue(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText());
+                        z.close();
 
                     }
                 });
@@ -247,6 +246,24 @@ public class ManageAllFlights {
                     TextField fpInput = new TextField ("" + f1.getFlightPrice());
                     Button updateF = new Button("Update Flight");
 
+                    from.getItems ().addAll (
+                            "Atlanta (ATL)",
+                            "San Fransisco (SFO)",
+                            "St. Louis (STL)",
+                            "New York (NYC)",
+                            "Dallas (DFW)",
+                            "Chicago (ORD)"
+
+                    );
+                    to.getItems ().addAll (
+                            "Atlanta (ATL)",
+                            "San Fransisco (SFO)",
+                            "St. Louis (STL)",
+                            "New York (NYC)",
+                            "Dallas (DFW)",
+                            "Chicago (ORD)"
+                    );
+
                     from.setPromptText (f1.getFromCity());
                     to.setPromptText (f1.getToCity());
 
@@ -274,7 +291,26 @@ public class ManageAllFlights {
                     s2.setTitle ( "Update Flight" );
                     s2.setScene ( scene2 );
 
-                    s2.showAndWait();
+                    s2.show();
+                    s1.close();
+
+                    DateTimeFormatter dt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                    updateF.setOnAction( e2 -> {
+                        if(from.getValue() == null && to.getValue() == null){
+                            Admin.updateFlight(f1.getFromCity(), f1.getToCity(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
+                        }else if(from.getValue() == null){
+                            Admin.updateFlight(f1.getFromCity(), to.getValue(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
+                        }else if(to.getValue() == null){
+                            Admin.updateFlight(from.getValue(), f1.getToCity(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
+                        }else{
+                            Admin.updateFlight(from.getValue(), to.getValue(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText(), f1.getFlightId());
+                        }
+
+                        s2.close();
+
+                    });
+
 
                 }
 

@@ -172,18 +172,29 @@ public class SearchFlights {
 
         search.setOnAction ( e-> {
 
+            if(departDate.getValue() == null) {
 
-            if(from.getValue() == null && to.getValue() == null){
-                flightTableView.setItems ( getFlight("Atlanta (ATL)", "San Fransisco (SFO)", departDate.getValue().format(dt1)));
-            }else if(from.getValue() == null){
-                flightTableView.setItems ( getFlight("Atlanta (ATL)", to.getValue(), departDate.getValue().format(dt1)));
-            }else if(to.getValue() == null){
-                flightTableView.setItems ( getFlight(from.getValue(), "San Fransisco (SFO)", departDate.getValue().format(dt1)));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Flight Creation");
+                alert.setContentText("You've cannot have any null values!");
+
+                alert.showAndWait();
             }else{
-                flightTableView.setItems ( getFlight(from.getValue (), to.getValue (), departDate.getValue().format(dt1)));
-            }
 
-            chooseFlight.showAndWait ();
+                if(from.getValue() == null && to.getValue() == null){
+                    flightTableView.setItems ( getFlight("Atlanta (ATL)", "San Fransisco (SFO)", departDate.getValue().format(dt1)));
+                }else if(from.getValue() == null){
+                    flightTableView.setItems ( getFlight("Atlanta (ATL)", to.getValue(), departDate.getValue().format(dt1)));
+                }else if(to.getValue() == null){
+                    flightTableView.setItems ( getFlight(from.getValue(), "San Fransisco (SFO)", departDate.getValue().format(dt1)));
+                }else{
+                    flightTableView.setItems ( getFlight(from.getValue (), to.getValue (), departDate.getValue().format(dt1)));
+                }
+
+                chooseFlight.showAndWait ();
+
+            }
 
         });
 
