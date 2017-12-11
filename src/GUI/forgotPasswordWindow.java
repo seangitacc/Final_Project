@@ -121,6 +121,7 @@ public class forgotPasswordWindow {
                 alert.setTitle ( "Your Password" );
                 alert.setHeaderText ( null );
                 alert.setContentText ( "Your password is: " + retrievedPassword );
+                forgotPasswordWindow.close();
 
                 alert.showAndWait ();
 
