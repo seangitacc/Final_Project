@@ -181,5 +181,70 @@ public class ManageAllFlights {
 
         } );
 
+        update.setOnAction ( e -> {
+
+            TextField flightInput = new TextField ( );
+            flightInput.setPromptText ( "Enter Flight Id" );
+            Button upd = new Button("Update Flight");
+
+            VBox v = new VBox ( 25 );
+
+            v.getChildren ().addAll ( flightInput,upd );
+
+            Scene s = new Scene ( v, 300,200 );
+            Stage s1 = new Stage (  );
+            s1.setScene ( s );
+            s1.setTitle ( "Update Flight" );
+            s1.show();
+
+            Label ti= new Label("Flight Id: " );
+            Label fromL = new Label ( "From " );
+            Label toL = new Label ( "To " );
+            ComboBox<String> from = new ComboBox ();
+            ComboBox<String> to = new ComboBox ();
+            Label departtf = new Label ( "Date of Departure" );
+            DatePicker departDate = new DatePicker ();
+            Label flightTime = new Label("Flight Time");
+            TextField ftInput = new TextField ();
+            Label flightPrice = new Label("Flight Price");
+            TextField fpInput = new TextField ();
+            Button updateF = new Button("Update Flight");
+
+            from.setPromptText ( "");//flightid.getFromCity
+            to.setPromptText (""); //flightid.getToCity
+            departDate.setPromptText ( "" );//flightid.getFlightDate
+            ftInput.setPromptText (  ""); //flightid.getflighttime
+            fpInput.setPromptText ( "" );//flightid.getflightprice
+
+            GridPane.setConstraints (ti,0,0  );
+            GridPane.setConstraints (fromL,0,1  );
+            GridPane.setConstraints ( from, 1,1 );
+            GridPane.setConstraints ( toL, 0,2 );
+            GridPane.setConstraints ( to,1,2 );
+            GridPane.setConstraints ( departtf,0,3 );
+            GridPane.setConstraints ( departDate,1,3 );
+            GridPane.setConstraints ( flightTime,0,4 );
+            GridPane.setConstraints ( ftInput,1,4 );
+            GridPane.setConstraints ( flightPrice,0,5 );
+            GridPane.setConstraints ( fpInput,1,5 );
+            GridPane.setConstraints ( updateF,1,6 );
+
+            GridPane grid3 = new GridPane ();
+            grid3.setAlignment ( Pos.CENTER );
+            grid3.setVgap ( 10 );
+            grid3.setHgap ( 25 );
+            grid3.getChildren ().addAll (ti,fromL,from,toL,to,departtf,departDate,flightTime,ftInput,flightPrice,fpInput,updateF  );
+
+            Scene scene2 = new Scene ( grid3,650,500 );
+            Stage s2 = new Stage (  );
+            s2.setTitle ( "Update Flight" );
+            s2.setScene ( scene2 );
+
+            upd.setOnAction ( e3-> s2.showAndWait() );
+
+
+
+        } );
+
     }
 }
