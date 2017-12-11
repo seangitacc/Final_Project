@@ -12,15 +12,7 @@ public class Customer extends User implements newUser, returningUser {
 
     public static int userID;
     public static int flightID;
-
-    public static int getFlightID() {
-        return flightID;
-    }
-
-    public static void setFlightID(int flightID) {
-        Customer.flightID = flightID;
-    }
-
+    private static int seatCount = 0;
     public static final String adminPassword = "iluvaria";
     public static boolean adminBool = false;
     public static String fullName = "";
@@ -207,34 +199,6 @@ public class Customer extends User implements newUser, returningUser {
 
     }
 
-    public static void checkFlights(String filterType, String filter){
-        try{
-
-            PreparedStatement ps = Utilities.connection.prepareStatement
-                    ("SELECT * FROM flights WHERE + " + filterType + " = ?");
-            ps.setString(1, filter);
-            ResultSet rs = ps.executeQuery();
-
-
-            if (rs.next()) {
-
-                do{
-                    System.out.print(rs.getString("flight_id") + " \t");
-                    System.out.print(rs.getString("from_city") + " \t");
-                    System.out.print(rs.getString("to_city") + " \t");
-                    System.out.print(rs.getString("flight_date") + " \t");
-                    System.out.print(rs.getString("flight_time") + " \t");
-                    System.out.print(rs.getString("flight_price") + " \t");
-                    System.out.println();
-                }while(rs.next());
-
-            }
-
-        }catch (Exception ex){
-            System.out.println(ex);
-        }
-    }
-
     public static void addFlight(int flightID, int userID){
         try{
 
@@ -245,29 +209,66 @@ public class Customer extends User implements newUser, returningUser {
             ps.setInt(1, flightID);
             ps.setInt(2, userID);
 
-            ps.execute();
+            ObservableList<Flight> flights = searchMyFlights(userID);
 
-            SQLWarning warning = ps.getWarnings();
+            PreparedStatement ps2 = Utilities.connection.prepareStatement
+                    ("SELECT flight_date, flight_time, flights_seats FROM flights where flight_id = ?");
+            ps2.setInt(1, flightID);
 
-            if(warning != null){
-                Alert alert = new Alert( Alert.AlertType.ERROR);
-                alert.setTitle ( "Warning" );
-                alert.setHeaderText ( "Flight Booking" );
-                alert.setContentText ( "You've already booked this flight!" );
+            ResultSet rs = ps2.executeQuery();
 
-                alert.showAndWait();
-            }
+            while(rs.next()){
+                String flightDate = rs.getString(1);
+                String flightTime = rs.getString(2);
+                int flightsCount = rs.getInt(3);
 
-            else{
-                Alert alert = new Alert ( Alert.AlertType.INFORMATION );
-                alert.setTitle ( "Information" );
-                alert.setHeaderText ( "Flight Booking" );
-                alert.setContentText ( "You've successfully booked this flight!" );
+                for(int i = 0; i < flights.size(); i++) {
+                    if (flights.get(i).getFlightDate().equals(flightDate) || flights.get(i).getFlightTime().equals(flightTime)) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Warning");
+                        alert.setHeaderText("Flight Booking");
+                        alert.setContentText("You've cannot book a conflicting flight!");
 
-                alert.showAndWait ();
-            }
+                        alert.showAndWait();
+                    }
+                }
+                if (flightsCount < seatCount){
+                        Alert alert = new Alert( Alert.AlertType.ERROR);
+                        alert.setTitle ( "Warning" );
+                        alert.setHeaderText ( "Flight Booking" );
+                        alert.setContentText ( "This flight is full, Professor Aria!" );
 
+                        alert.showAndWait();
 
+                    }else{
+                            String decrementQuery = "UPDATE flights\n" +
+                                    "SET flights_seats = flights_seats - 1\n" +
+                                    "Where flight_id = ?";
+                            PreparedStatement decrementCount = Utilities.connection.prepareStatement(decrementQuery);
+                            decrementCount.setInt(1, flightID);
+                            decrementCount.execute();
+
+                        ps.execute();
+
+                        SQLWarning warning = ps.getWarnings();
+
+                        if(warning != null){
+                            Alert alert = new Alert( Alert.AlertType.ERROR);
+                            alert.setTitle ( "Warning" );
+                            alert.setHeaderText ( "Flight Booking" );
+                            alert.setContentText ( "You've already booked this flight!" );
+
+                            alert.showAndWait();
+                        }else{
+                            Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                            alert.setTitle ( "Information" );
+                            alert.setHeaderText ( "Flight Booking" );
+                            alert.setContentText ( "You've successfully booked this flight!" );
+
+                            alert.showAndWait ();
+                        }
+                        }
+                }
 
         }catch (Exception ex){
             System.out.println(ex);
@@ -345,6 +346,14 @@ public class Customer extends User implements newUser, returningUser {
 
         return fullName;
 
+    }
+
+    public static int getFlightID() {
+        return flightID;
+    }
+
+    public static void setFlightID(int flightID) {
+        Customer.flightID = flightID;
     }
 
 }

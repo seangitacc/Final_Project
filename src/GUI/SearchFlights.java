@@ -231,9 +231,5 @@ public class SearchFlights {
 
     }
 
-    public static void createTable(){
-
-    }
-
 }
 

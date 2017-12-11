@@ -50,7 +50,7 @@ public class MainMenu {
         Label user = new Label("Hello, " + Customer.fullName);
         GridPane grid = new GridPane ();
 
-        grid.setAlignment ( Pos.CENTER );
+        grid.setAlignment ( Pos.CENTER_LEFT );
         grid.setPadding ( new Insets ( 25 ));
         grid.setHgap ( 15 );
         grid.setVgap ( 25 );
