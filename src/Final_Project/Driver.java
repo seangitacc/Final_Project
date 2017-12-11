@@ -45,7 +45,9 @@ public class Driver extends Application {
         javafx.scene.control.Button loginButton = new javafx.scene.control.Button("Click to Login!");
         javafx.scene.control.Button registerButton = new Button("Click to Register!");
 
-        loginButton.setOnAction ( e -> LoginWindow.display () );
+        loginButton.setOnAction ( e -> {
+            LoginWindow.display ();
+        } );
         registerButton.setOnAction ( e -> RegisterWindow.dispaly () );
         VBox vb = new VBox(20);
         HBox hb = new HBox(20);

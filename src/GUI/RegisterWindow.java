@@ -181,7 +181,7 @@ public class RegisterWindow {
         grid.getChildren ().addAll ( fnl,lnl,adrsl,zipl,stl,unl,pwl, cpwl,emaill,ssnl,sql,fntf,lntf,adrstf,ziptf,sttf,untf,pwtf, cpwtf, emailtf,ssntf,sqtf,ans, anstf, backButton,submitButton,admin,adminCheck );
 
         grid.setAlignment ( Pos.CENTER );
-        Scene registerScene = new Scene ( grid, 450,550 );
+        Scene registerScene = new Scene ( grid, 550,650 );
 
         RegisterWindow.setScene ( registerScene);
         RegisterWindow.showAndWait ();

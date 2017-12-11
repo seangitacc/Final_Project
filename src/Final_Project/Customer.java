@@ -298,6 +298,13 @@ public class Customer extends User implements newUser, returningUser {
             incrementCount.setInt(1, flightID);
             incrementCount.execute();
 
+            Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+            alert.setTitle ( "Information" );
+            alert.setHeaderText ( "Flight Deletion" );
+            alert.setContentText ( "You've successfully deleted this flight!" );
+
+            alert.showAndWait ();
+
 
         }catch (Exception ex){
             System.out.println(ex);
