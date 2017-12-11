@@ -93,7 +93,7 @@ public class RegisterWindow {
                                 adminCheck.setSelected(false);
                             }
 
-                        }else {
+                        }/*else {
 
                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                 alert.setTitle("Error");
@@ -105,7 +105,8 @@ public class RegisterWindow {
                                 adminCheck.setSelected(false);
 
                             }
-
+*/
+                        adminCheck.setSelected(false);
                     }
 
                 });

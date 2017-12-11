@@ -119,10 +119,12 @@ public class MainMenu {
         VBox vb = new VBox(20);
         vb.getChildren().addAll(searchFlightTableView, hb);
 
-        Scene manageMyFlightScene = new Scene(vb,1000,600);
-        Stage manageMyFlighStage = new Stage();
-        manageMyFlighStage.setTitle("Manage My Flights");
-        manageMyFlighStage.setScene(manageMyFlightScene);
+        Scene manageMyFlightScene = new Scene(vb,1250,700);
+        Stage manageMyFlightStage = new Stage();
+        manageMyFlightStage.setTitle("Manage My Flights");
+        manageMyFlightStage.setScene(manageMyFlightScene);
+
+        vb.setPadding ( new Insets ( 25 ) );
 
         searchFlightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn, flightPriceColumn);
 
@@ -130,7 +132,7 @@ public class MainMenu {
         manageMyFlights.setOnAction ( e-> {
 
             searchFlightTableView.setItems (Customer.searchMyFlights(Customer.userID));
-            manageMyFlighStage.showAndWait (); });
+            manageMyFlightStage.showAndWait (); });
 
         deleteFlight.setOnAction(e -> {Flight selectedFlight = searchFlightTableView.getSelectionModel().getSelectedItem();
 
@@ -144,7 +146,7 @@ public class MainMenu {
         });
 
         addFlight.setOnAction ( e -> {
-            manageMyFlighStage.close ();
+            manageMyFlightStage.close ();
             SearchFlights.display ();
         } );
 
