@@ -72,8 +72,9 @@ public class RegisterWindow {
                         dialog.setContentText("Enter Master Password: ");
 
                         Optional<String> result = dialog.showAndWait();
-                        result.ifPresent(name -> {
-                            if (name.equals(Customer.adminPassword)) {
+                        if(result.isPresent()) {
+
+                            if (result.get().equals(Customer.adminPassword)) {
 
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("Information");
@@ -81,9 +82,7 @@ public class RegisterWindow {
                                 alert.setContentText("Welcome, administrator!");
                                 Customer.adminBool = true;
                                 alert.showAndWait();
-
-
-                            } else {
+                            }else{
                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                 alert.setTitle("Error");
                                 alert.setHeaderText("Invalid Password!");
@@ -94,8 +93,18 @@ public class RegisterWindow {
                                 adminCheck.setSelected(false);
                             }
 
+                        }else {
 
-                        });
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Error");
+                                alert.setHeaderText("Invalid Password!");
+                                alert.setContentText("We will now uncheck the admin box for you.");
+
+                                alert.showAndWait();
+
+                                adminCheck.setSelected(false);
+
+                            }
 
                     }
 
