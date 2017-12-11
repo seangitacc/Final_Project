@@ -34,39 +34,7 @@ public class Driver extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-
-        Stage MainWindow = new Stage ();
-        MainWindow.setTitle ( "Ayrlyne" );
-        MainWindow.setMinHeight ( 250 );
-
-
-        javafx.scene.control.Label welcomeMessage = new javafx.scene.control.Label( "Welcome to Ayrlyne!" );
-        welcomeMessage.setFont(new Font("Helvetica", 48));
-        javafx.scene.control.Button loginButton = new javafx.scene.control.Button("Click to Login!");
-        javafx.scene.control.Button registerButton = new Button("Click to Register!");
-
-        loginButton.setOnAction ( e -> {
-            LoginWindow.display ();
-        } );
-        registerButton.setOnAction ( e -> RegisterWindow.dispaly () );
-        VBox vb = new VBox(20);
-        HBox hb = new HBox(20);
-
-        Scene entryScene;
-
-        hb.getChildren ().addAll (loginButton,registerButton );
-        vb.getChildren ().addAll ( welcomeMessage,hb );
-        vb.setAlignment ( Pos.CENTER );
-        hb.setAlignment ( Pos.CENTER );
-
-
-        entryScene = new Scene ( vb , 1250  ,  700, Color.rgb ( 200,150,26 ));
-
-
-
-        MainWindow.setScene ( entryScene );
-        primaryStage = MainWindow;
-        primaryStage.show();
+       EntryWindow.display ();
 
     }
 
@@ -75,6 +43,8 @@ public class Driver extends Application {
         Customer.fullName = "";
         Customer.adminBool = false;
         Customer.adminCheck = 0;
+
+        EntryWindow.display ();
         }
 
 }

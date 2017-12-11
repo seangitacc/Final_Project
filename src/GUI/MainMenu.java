@@ -34,6 +34,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -108,12 +109,17 @@ public class MainMenu {
         TableView<Flight> searchFlightTableView = new TableView ();
 
         Button deleteFlight = new Button("Delete Flight");
+        Button addFlight = new Button("Add Flight");
+
+        HBox hb = new HBox ( 20 );
+
+        hb.getChildren ().addAll ( addFlight,deleteFlight );
 
 
         VBox vb = new VBox(20);
-        vb.getChildren().addAll(searchFlightTableView, deleteFlight);
+        vb.getChildren().addAll(searchFlightTableView, hb);
 
-        Scene manageMyFlightScene = new Scene(vb,800,600);
+        Scene manageMyFlightScene = new Scene(vb,1000,600);
         Stage manageMyFlighStage = new Stage();
         manageMyFlighStage.setTitle("Manage My Flights");
         manageMyFlighStage.setScene(manageMyFlightScene);
@@ -137,6 +143,11 @@ public class MainMenu {
             selectedFlights.forEach(allFlights:: remove);
         });
 
+        addFlight.setOnAction ( e -> {
+            manageMyFlighStage.close ();
+            SearchFlights.display ();
+        } );
+
         logout.setOnAction ( e ->{
             MainMenu.close();
             Driver.logout ();
@@ -146,6 +157,7 @@ public class MainMenu {
             ManageAllFlights.display ();
         } );
 
+        stage.show();
     }
 
     public static void close(){

@@ -53,7 +53,9 @@ public class LoginWindow {
 
             if(Customer.userID != 0){
                 LoginWindow.close();
+                EntryWindow.close ();
                 MainMenu.display();
+
             }
 
         } );
@@ -84,7 +86,7 @@ public class LoginWindow {
 
 
         LoginWindow.setScene ( LoginScene );
-        LoginWindow.showAndWait ();
+        LoginWindow.show();
 
     }
 
