@@ -31,7 +31,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class SearchFlights {
 
-
     public static void display() {
 
         Stage searchFlightStage = new Stage ();
@@ -126,8 +125,6 @@ public class SearchFlights {
         Scene scene = new Scene ( vb, 1250, 700 );
 
 
-        TableView<Flight> flightTableView = new TableView ();
-
         TableColumn<Flight, Integer> flightIdColumn = new TableColumn<Flight, Integer> ( "Flight ID" );
         flightIdColumn.setPrefWidth( 100 );
         flightIdColumn.setCellValueFactory ( new PropertyValueFactory<Flight, Integer> ("flightId") );
@@ -152,6 +149,7 @@ public class SearchFlights {
         flightPriceColumn.setPrefWidth ( 100 );
         flightPriceColumn.setCellValueFactory ( new PropertyValueFactory<> ("flightPrice") );
 
+        TableView<Flight> flightTableView = new TableView ();
 
         Button addFlight = new Button("Add Flight");
         addFlight.setAlignment ( Pos.BOTTOM_RIGHT );
@@ -169,9 +167,14 @@ public class SearchFlights {
 
         DateTimeFormatter dt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        search.setOnAction ( e-> { flightTableView.setItems ( getFlight(from.getPromptText(), to.getPromptText(), departDate.getValue().format(dt1)));
         flightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn, flightPriceColumn);
-        chooseFlight.showAndWait (); });
+
+        search.setOnAction ( e-> {
+
+            flightTableView.setItems ( getFlight(from.getPromptText(), to.getPromptText(), departDate.getValue().format(dt1)));
+            chooseFlight.showAndWait ();
+
+        });
 
         searchFlightStage.setScene ( scene );
         searchFlightStage.show();
@@ -225,6 +228,10 @@ public class SearchFlights {
 
 
         return flights;
+
+    }
+
+    public static void createTable(){
 
     }
 

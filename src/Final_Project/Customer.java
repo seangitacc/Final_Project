@@ -1,5 +1,7 @@
 package Final_Project;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
@@ -290,7 +292,9 @@ public class Customer extends User implements newUser, returningUser {
         }
     }
 
-    public static void searchMyFlights(int userID){
+    public static ObservableList<Flight> searchMyFlights(int userID){
+
+        ObservableList<Flight> flights = FXCollections.observableArrayList ();
 
         try {
 
@@ -301,26 +305,21 @@ public class Customer extends User implements newUser, returningUser {
                             "users.user_id = flights_users.user_id AND\n" +
                             "users.user_id = ?;");
             ps.setInt(1, userID);
-            ResultSet rs = ps.executeQuery();
+            ResultSet count = ps.executeQuery();
 
 
-            if (rs.next()) {
+            while(count.next()){
 
-                do {
-                    System.out.print(rs.getString("flight_id") + " \t");
-                    System.out.print(rs.getString("from_city") + " \t");
-                    System.out.print(rs.getString("to_city") + " \t");
-                    System.out.print(rs.getString("flight_date") + " \t");
-                    System.out.print(rs.getString("flight_time") + " \t");
-                    System.out.print(rs.getString("flight_price") + " \t");
-                    System.out.println();
-                } while (rs.next());
-
+                flights.add(new Flight(Integer.parseInt(count.getString(1)), count.getString(2), count.getString(3),
+                        count.getString(4), count.getString(5), Double.parseDouble(count.getString(6))));
             }
 
-        }catch(Exception ex){
+        }catch (Exception ex){
             System.out.println(ex);
         }
+
+
+        return flights;
     }
 
     public static String getName(int userID){
