@@ -103,7 +103,18 @@ public class RegisterWindow {
 
         submitButton.setOnAction ( e -> {
 
-                  if (pwtf.getText () != null) {
+                  if (fntf.getText ().equals("") || lntf.getText ().equals("") || adrstf.getText ().equals("") || ziptf.getText().equals("")
+                        || sttf.getText().equals("") || untf.getText ().equals("")|| pwtf.getText ().equals("") || emailtf.getText ().equals("")
+                        || ssntf.getText ().equals("") || sqtf.getText ().equals("") ||  anstf.getText ().equals("")) {
+
+                      Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                      alert.setTitle ( "Warning" );
+                      alert.setHeaderText ( "Invalid Input!" );
+                      alert.setContentText ( "You have some null values!" );
+
+                      alert.showAndWait ();
+
+                  }else {
 
                       //Check to see if confirm and password match
                       if (pwtf.getText ().equals ( cpwtf.getText () )) {
@@ -130,15 +141,6 @@ public class RegisterWindow {
                           alert.showAndWait ();
 
                       }
-
-                  }else{
-
-                      Alert alert = new Alert ( Alert.AlertType.INFORMATION );
-                      alert.setTitle ( "Warning" );
-                      alert.setHeaderText ( "Invalid Input!" );
-                      alert.setContentText ( "You have some null values!" );
-
-                      alert.showAndWait ();
 
                   }
               });
