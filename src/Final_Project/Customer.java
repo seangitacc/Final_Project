@@ -217,22 +217,26 @@ public class Customer extends User implements newUser, returningUser {
 
             ResultSet rs = ps2.executeQuery();
 
-            while(rs.next()){
+            while(rs.next()) {
                 String flightDate = rs.getString(1);
                 String flightTime = rs.getString(2);
                 int flightsCount = rs.getInt(3);
+                boolean ignore = false;
 
-                for(int i = 0; i < flights.size(); i++) {
+                for (int i = 0; i < flights.size(); i++) {
                     if (flights.get(i).getFlightDate().equals(flightDate) || flights.get(i).getFlightTime().equals(flightTime)) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Warning");
-                        alert.setHeaderText("Flight Booking");
-                        alert.setContentText("You've cannot book a conflicting flight!");
-
-                        alert.showAndWait();
+                        ignore = true;
                     }
                 }
-                if (flightsCount < seatCount){
+
+                if (ignore){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Flight Booking");
+                    alert.setContentText("You've cannot book a conflicting flight!");
+
+                    alert.showAndWait();
+                }else if(flightsCount < seatCount){
                         Alert alert = new Alert( Alert.AlertType.ERROR);
                         alert.setTitle ( "Warning" );
                         alert.setHeaderText ( "Flight Booking" );
@@ -240,7 +244,7 @@ public class Customer extends User implements newUser, returningUser {
 
                         alert.showAndWait();
 
-                    }else{
+                }else{
                             String decrementQuery = "UPDATE flights\n" +
                                     "SET flights_seats = flights_seats - 1\n" +
                                     "Where flight_id = ?";
@@ -286,6 +290,13 @@ public class Customer extends User implements newUser, returningUser {
             ps.setInt(2, userID);
 
             ps.execute();
+
+            String incrementQuery = "UPDATE flights\n" +
+                    "SET flights_seats = flights_seats + 1\n" +
+                    "Where flight_id = ?";
+            PreparedStatement incrementCount = Utilities.connection.prepareStatement(incrementQuery);
+            incrementCount.setInt(1, flightID);
+            incrementCount.execute();
 
 
         }catch (Exception ex){
