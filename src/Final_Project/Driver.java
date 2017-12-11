@@ -15,6 +15,9 @@ public class Driver extends Application {
 
     public static void main(String[] args) throws Exception, ClassNotFoundException {
 
+        //Known bug workaround for Windows 10 computers with touchscreens
+        System.setProperty("glass.accessible.force", "false");
+
         // Load the JDBC driver
         Class.forName("com.mysql.jdbc.Driver");
         System.out.println("Driver loaded");

@@ -203,7 +203,7 @@ public class SearchFlights {
 
     }
 
-    public static ObservableList<Flight> getFlight(String fromCity, String toCity, String departDate){   //getFlight(Date filterType)
+    public static ObservableList<Flight> getFlight(String fromCity, String toCity, String departDate){
 
         ObservableList<Flight> flights = FXCollections.observableArrayList ();
 
