@@ -4,6 +4,7 @@ import GUI.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,22 +14,37 @@ import javafx.stage.Stage;
 
 public class Driver extends Application {
 
-    public static void main(String[] args) throws Exception, ClassNotFoundException {
+    public static void main(String[] args) {
 
-        //Known bug workaround for Windows 10 computers with touchscreens
-        System.setProperty("glass.accessible.force", "false");
+        try{
 
-        // Load the JDBC driver
-        Class.forName("com.mysql.jdbc.Driver");
-        System.out.println("Driver loaded");
+            //Known bug workaround for Windows 10 computers with touchscreens
+            System.setProperty("glass.accessible.force", "false");
 
-        Utilities.createConnnection();;
-        Utilities.createStatement();
+            // Load the JDBC driver
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Driver loaded");
 
-        launch ( args );
+            Utilities.createConnnection();;
+            Utilities.createStatement();
 
-        // Close the connection
-        Utilities.connection.close();
+            launch ( args );
+
+            // Close the connection
+            Utilities.connection.close();
+
+        }catch(Exception ex){
+
+            System.out.println(ex);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Application Error");
+            alert.setContentText("There has been an error. Please contact the system administrator.");
+
+            alert.showAndWait();
+
+        }
     }
 
     @Override

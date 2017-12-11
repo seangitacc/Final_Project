@@ -176,8 +176,8 @@ public class SearchFlights {
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
-                alert.setHeaderText("Flight Creation");
-                alert.setContentText("You've cannot have any null values!");
+                alert.setHeaderText("Flight Search");
+                alert.setContentText("You have entered an incorrect value!");
 
                 alert.showAndWait();
             }else{
