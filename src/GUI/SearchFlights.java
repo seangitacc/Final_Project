@@ -172,7 +172,17 @@ public class SearchFlights {
 
         search.setOnAction ( e-> {
 
-            flightTableView.setItems ( getFlight(from.getValue (), to.getValue (), departDate.getValue().format(dt1)));
+
+            if(from.getValue() == null && to.getValue() == null){
+                flightTableView.setItems ( getFlight("Atlanta (ATL)", "San Fransisco (SFO)", departDate.getValue().format(dt1)));
+            }else if(from.getValue() == null){
+                flightTableView.setItems ( getFlight("Atlanta (ATL)", to.getValue(), departDate.getValue().format(dt1)));
+            }else if(to.getValue() == null){
+                flightTableView.setItems ( getFlight(from.getValue(), "San Fransisco (SFO)", departDate.getValue().format(dt1)));
+            }else{
+                flightTableView.setItems ( getFlight(from.getValue (), to.getValue (), departDate.getValue().format(dt1)));
+            }
+
             chooseFlight.showAndWait ();
 
         });

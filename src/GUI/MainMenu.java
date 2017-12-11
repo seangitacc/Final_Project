@@ -37,7 +37,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import sun.jvm.hotspot.memory.HeapBlock;
 
 public class MainMenu {
 

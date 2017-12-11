@@ -3,6 +3,8 @@ package GUI;
 import Final_Project.Admin;
 import Final_Project.Customer;
 import Final_Project.Driver;
+import Final_Project.Flight;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +16,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sun.awt.image.GifImageDecoder;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
@@ -70,8 +74,6 @@ public class ManageAllFlights {
         vb.getChildren ().addAll ( grid,grid2 );
 
         Scene scene = new Scene ( vb, 1250,700 );
-
-
 
 
        manageFlightStage.setScene (scene);
@@ -178,6 +180,26 @@ public class ManageAllFlights {
             z.setScene ( s );
             z.show ();
 
+            DateTimeFormatter dt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+
+
+                addNew.setOnAction(e2 -> {
+                    if(from.getValue() == null || to.getValue() == null || departDate.getValue() == null || ftInput.getText() == null || fpInput.getText() == null) {
+
+                        Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                        alert.setTitle ( "Information" );
+                        alert.setHeaderText ( "Flight Creation" );
+                        alert.setContentText ( "You've cannot have any null values!" );
+
+                        alert.showAndWait ();
+
+                    }else {
+
+                        Admin.addNewFlight(from.getValue(), to.getValue(), departDate.getValue().format(dt1), ftInput.getText(), fpInput.getText());
+
+                    }
+                });
 
         } );
 
@@ -197,50 +219,67 @@ public class ManageAllFlights {
             s1.setTitle ( "Update Flight" );
             s1.show();
 
-            Label ti= new Label("Flight Id: " );
-            Label fromL = new Label ( "From " );
-            Label toL = new Label ( "To " );
-            ComboBox<String> from = new ComboBox ();
-            ComboBox<String> to = new ComboBox ();
-            Label departtf = new Label ( "Date of Departure" );
-            DatePicker departDate = new DatePicker ();
-            Label flightTime = new Label("Flight Time");
-            TextField ftInput = new TextField ();
-            Label flightPrice = new Label("Flight Price");
-            TextField fpInput = new TextField ();
-            Button updateF = new Button("Update Flight");
+            upd.setOnAction (e3->{
 
-            from.setPromptText ( "");//flightid.getFromCity
-            to.setPromptText (""); //flightid.getToCity
-            departDate.setPromptText ( "" );//flightid.getFlightDate
-            ftInput.setPromptText (  ""); //flightid.getflighttime
-            fpInput.setPromptText ( "" );//flightid.getflightprice
+                Flight f1 = Admin.searchUpdateFlights(Integer.parseInt(flightInput.getText()));
 
-            GridPane.setConstraints (ti,0,0  );
-            GridPane.setConstraints (fromL,0,1  );
-            GridPane.setConstraints ( from, 1,1 );
-            GridPane.setConstraints ( toL, 0,2 );
-            GridPane.setConstraints ( to,1,2 );
-            GridPane.setConstraints ( departtf,0,3 );
-            GridPane.setConstraints ( departDate,1,3 );
-            GridPane.setConstraints ( flightTime,0,4 );
-            GridPane.setConstraints ( ftInput,1,4 );
-            GridPane.setConstraints ( flightPrice,0,5 );
-            GridPane.setConstraints ( fpInput,1,5 );
-            GridPane.setConstraints ( updateF,1,6 );
+                if(f1.getFlightId() == 0){
+                    Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                    alert.setTitle ( "Information" );
+                    alert.setHeaderText ( "Flight Search" );
+                    alert.setContentText ( "That flight does not exist!" );
 
-            GridPane grid3 = new GridPane ();
-            grid3.setAlignment ( Pos.CENTER );
-            grid3.setVgap ( 10 );
-            grid3.setHgap ( 25 );
-            grid3.getChildren ().addAll (ti,fromL,from,toL,to,departtf,departDate,flightTime,ftInput,flightPrice,fpInput,updateF  );
+                    alert.showAndWait ();
 
-            Scene scene2 = new Scene ( grid3,650,500 );
-            Stage s2 = new Stage (  );
-            s2.setTitle ( "Update Flight" );
-            s2.setScene ( scene2 );
+                }else{
 
-            upd.setOnAction ( e3-> s2.showAndWait() );
+                    Label ti= new Label("Flight Id: \t\t\t\t\t\t\t" + f1.getFlightId());
+                    Label fromL = new Label ( "From " );
+                    Label toL = new Label ( "To " );
+                    ComboBox<String> from = new ComboBox ();
+                    ComboBox<String> to = new ComboBox ();
+                    Label departtf = new Label ( "Date of Departure" );
+                    LocalDate flightDate = LocalDate.parse(f1.getFlightDate());
+                    DatePicker departDate = new DatePicker (flightDate);
+                    Label flightTime = new Label("Flight Time");
+                    TextField ftInput = new TextField (f1.getFlightTime());
+                    Label flightPrice = new Label("Flight Price");
+                    TextField fpInput = new TextField ("" + f1.getFlightPrice());
+                    Button updateF = new Button("Update Flight");
+
+                    from.setPromptText (f1.getFromCity());
+                    to.setPromptText (f1.getToCity());
+
+                    GridPane.setConstraints (ti,0,0  );
+                    GridPane.setConstraints (fromL,0,1  );
+                    GridPane.setConstraints ( from, 1,1 );
+                    GridPane.setConstraints ( toL, 0,2 );
+                    GridPane.setConstraints ( to,1,2 );
+                    GridPane.setConstraints ( departtf,0,3 );
+                    GridPane.setConstraints ( departDate,1,3 );
+                    GridPane.setConstraints ( flightTime,0,4 );
+                    GridPane.setConstraints ( ftInput,1,4 );
+                    GridPane.setConstraints ( flightPrice,0,5 );
+                    GridPane.setConstraints ( fpInput,1,5 );
+                    GridPane.setConstraints ( updateF,1,6 );
+
+                    GridPane grid3 = new GridPane ();
+                    grid3.setAlignment ( Pos.CENTER );
+                    grid3.setVgap ( 10 );
+                    grid3.setHgap ( 25 );
+                    grid3.getChildren ().addAll (ti,fromL,from,toL,to,departtf,departDate,flightTime,ftInput,flightPrice,fpInput,updateF  );
+
+                    Scene scene2 = new Scene ( grid3,650,500 );
+                    Stage s2 = new Stage (  );
+                    s2.setTitle ( "Update Flight" );
+                    s2.setScene ( scene2 );
+
+                    s2.showAndWait();
+
+                }
+
+
+            });
 
 
 
