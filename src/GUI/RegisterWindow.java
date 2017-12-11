@@ -106,7 +106,7 @@ public class RegisterWindow {
 
                             }
 */
-                        adminCheck.setSelected(false);
+                        adminCheck.setSelected( Customer.adminBool);
                     }
 
                 });
