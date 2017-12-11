@@ -29,6 +29,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Created by nikhilpalli on 12/6/17.
  */
+
 public class SearchFlights {
 
     public static void display() {
@@ -60,7 +61,7 @@ public class SearchFlights {
 
         from.getItems ().addAll (
                 "Atlanta (ATL)",
-                "San Fransisco(SFO)",
+                "San Fransisco (SFO)",
                 "St. Louis (STL)",
                 "New York (NYC)",
                 "Dallas (DFW)",
@@ -69,7 +70,7 @@ public class SearchFlights {
         );
         to.getItems ().addAll (
                 "Atlanta (ATL)",
-                "San Fransisco(SFO)",
+                "San Fransisco (SFO)",
                 "St. Louis (STL)",
                 "New York (NYC)",
                 "Dallas (DFW)",
@@ -171,7 +172,7 @@ public class SearchFlights {
 
         search.setOnAction ( e-> {
 
-            flightTableView.setItems ( getFlight(from.getPromptText(), to.getPromptText(), departDate.getValue().format(dt1)));
+            flightTableView.setItems ( getFlight(from.getValue (), to.getValue (), departDate.getValue().format(dt1)));
             chooseFlight.showAndWait ();
 
         });
@@ -228,7 +229,6 @@ public class SearchFlights {
 
 
         return flights;
-
     }
 
 }
