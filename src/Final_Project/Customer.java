@@ -306,7 +306,7 @@ public class Customer extends User implements newUser, returningUser {
 
                 //If there is a conflicting date and time, the user is not allowed to book the flight
                 for (Flight flight : flights) {
-                    if (flight.getFlightDate().equals(flightDate) || flight.getFlightTime().equals(flightTime)) {
+                    if (flight.getFlightDate().equals(flightDate) && flight.getFlightTime().equals(flightTime)) {
                         ignore = true;
                     }
                 }
