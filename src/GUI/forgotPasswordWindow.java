@@ -19,12 +19,12 @@ class forgotPasswordWindow {
 
     public static void display() {
 
+        //declare stage
         Stage forgotPasswordWindow = new Stage ();
         forgotPasswordWindow.setTitle ( "Forgot Password" );
         forgotPasswordWindow.initModality ( Modality.APPLICATION_MODAL );
 
-
-
+        //
         Label enterun = new Label("Enter Username: ");
         Label enterssn = new Label("Enter SSN: ");
         TextField usInput = new TextField (  );

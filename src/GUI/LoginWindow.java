@@ -21,6 +21,7 @@ class LoginWindow {
 
     public static void display() {
 
+
         Stage LoginWindow = new Stage();
         LoginWindow.setTitle ( "Login" );
         LoginWindow.initModality ( Modality.APPLICATION_MODAL );

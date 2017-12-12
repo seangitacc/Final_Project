@@ -38,9 +38,7 @@ class SearchFlights {
         ComboBox<String> from = new ComboBox ();
         ComboBox<String> to = new ComboBox ();
         Label departtf = new Label ( "Date of Departure" );
-        Label arrivetf = new Label ( "Date of Arrival" );
         DatePicker departDate = new DatePicker ();
-        DatePicker arriveDate = new DatePicker ();
         Button search = new Button("Search");
 
 
@@ -49,11 +47,18 @@ class SearchFlights {
         Label user = new Label ( "Hello, " + Customer.fullName);
         GridPane grid2 = new GridPane ();
 
+        title.setStyle ( "-fx-text-fill: #e8e8e8" );
+        fromL.setStyle ( "-fx-text-fill: #e8e8e8" );
+        toL.setStyle ( "-fx-text-fill: #e8e8e8" );
+        departtf.setStyle ( "-fx-text-fill: #e8e8e8" );
+        user.setStyle ( "-fx-text-fill: #e8e8e8" );
+
         title.setFont ( new Font ( "Helvetica", 36 ) );
 
         from.setPromptText ( "Atlanta (ATL)" );
         to.setPromptText ( "San Fransisco (SFO)" );
 
+        departDate.setStyle ( "-fx-text-fill: #383838" );
         from.getItems ().addAll (
                 "Atlanta (ATL)",
                 "San Fransisco (SFO)",
@@ -78,7 +83,7 @@ class SearchFlights {
         departDate.setPromptText ( "" + LocalDate.now() );
 
         departDate.setMaxSize ( 200, 10 );
-        arriveDate.setMaxSize ( 200, 10 );
+
 
         GridPane grid = new GridPane ();
 
@@ -104,8 +109,6 @@ class SearchFlights {
         GridPane.setConstraints ( to, 2, 5 );
         GridPane.setConstraints ( departtf, 0, 7 );
         GridPane.setConstraints ( departDate, 2, 7 );
-        GridPane.setConstraints ( arrivetf, 0, 9 );
-        GridPane.setConstraints ( arriveDate, 2, 9 );
         GridPane.setConstraints ( search,2,11 );
 
 
@@ -120,7 +123,7 @@ class SearchFlights {
 
         Scene scene = new Scene ( vb, 1250, 700 );
 
-        scene.getStylesheets ().add("Theme.css");
+        scene.getStylesheets ().add("TableViewTheme.css");
 
 
         TableColumn<Flight, Integer> flightIdColumn = new TableColumn<>("Flight ID");

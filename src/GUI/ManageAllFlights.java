@@ -158,6 +158,14 @@ class ManageAllFlights {
 
             t.setFont ( new Font ( "Helvetica", 36 ) );
 
+            t.setStyle ( "-fx-text-fill: #e8e8e8" );
+            fromL.setStyle ( "-fx-text-fill: #e8e8e8" );
+            toL.setStyle ( "-fx-text-fill: #e8e8e8" );
+            departtf.setStyle ( "-fx-text-fill: #e8e8e8" );
+            flightTime.setStyle ( "-fx-text-fill: #e8e8e8" );
+            flightPrice.setStyle ( "-fx-text-fill: #e8e8e8" );
+
+
             from.getItems ().addAll (
                     "Atlanta (ATL)",
                     "San Fransisco (SFO)",
@@ -199,8 +207,8 @@ class ManageAllFlights {
             grid4.setAlignment ( Pos.CENTER );
 
 
-            Scene s = new Scene(grid4, 600,400);
-            s.getStylesheets ().add ( "Theme.css" );
+            Scene s = new Scene(grid4, 650,500);
+            s.getStylesheets ().add ( "TableViewTheme.css" );
             z.setScene ( s );
             z.show ();
 
@@ -284,7 +292,9 @@ class ManageAllFlights {
 
                     } else {
 
-                        Label ti = new Label("Flight Id: \t\t\t\t\t\t\t" + f1.getFlightId());
+                        header.setStyle ( "-fx-text-fill: #e8e8e8" );
+                        Label ti = new Label("Flight Id ");
+                        Label ti2 = new Label ( " " + f1.getFlightId());
                         Label fromL = new Label("From ");
                         Label toL = new Label("To ");
                         ComboBox<String> from = new ComboBox();
@@ -297,6 +307,14 @@ class ManageAllFlights {
                         Label flightPrice = new Label("Flight Price");
                         TextField fpInput = new TextField("" + f1.getFlightPrice());
                         Button updateF = new Button("Update Flight");
+
+                        ti.setStyle ( "-fx-text-fill: #e8e8e8" );
+                        ti2.setStyle ( "-fx-text-fill: #e8e8e8" );
+                        fromL.setStyle ( "-fx-text-fill: #e8e8e8" );
+                        toL.setStyle ( "-fx-text-fill: #e8e8e8" );
+                        departtf.setStyle ( "-fx-text-fill: #e8e8e8" );
+                        flightTime.setStyle ( "-fx-text-fill: #e8e8e8" );
+                        flightPrice.setStyle ( "-fx-text-fill: #e8e8e8" );
 
                         from.getItems().addAll(
                                 "Atlanta (ATL)",
@@ -320,6 +338,7 @@ class ManageAllFlights {
                         to.setPromptText(f1.getToCity());
 
                         GridPane.setConstraints(ti, 0, 0);
+                        GridPane.setConstraints ( ti2, 1,0 );
                         GridPane.setConstraints(fromL, 0, 1);
                         GridPane.setConstraints(from, 1, 1);
                         GridPane.setConstraints(toL, 0, 2);
@@ -334,16 +353,17 @@ class ManageAllFlights {
 
                         GridPane grid3 = new GridPane();
                         grid3.setAlignment(Pos.CENTER);
-                        grid3.setVgap(10);
-                        grid3.setHgap(25);
-                        grid3.getChildren().addAll(ti, fromL, from, toL, to, departtf, departDate, flightTime, ftInput, flightPrice, fpInput, updateF);
+                        grid3.setVgap(25);
+                        grid3.setHgap(10);
+                        grid3.setPadding ( new Insets ( 25 ) );
+                        grid3.getChildren().addAll(ti, ti2,fromL, from, toL, to, departtf, departDate, flightTime, ftInput, flightPrice, fpInput, updateF);
 
                         VBox v1 = new VBox ( 20 );
                         v1.setPadding ( new Insets ( 25 ) );
                         v1.getChildren ().addAll ( header,grid3 );
 
                         Scene scene2 = new Scene(v1, 650, 500);
-                        scene2.getStylesheets ().add("Theme.css");
+                        scene2.getStylesheets ().add("TableViewTheme.css");
                         Stage s2 = new Stage();
                         s2.setTitle("Update Flight");
                         s2.setScene(scene2);
