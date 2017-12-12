@@ -213,7 +213,7 @@ class SearchFlights {
 
             searchFlightStage.close();
             MainMenu.close();
-            Driver.logout ();
+            Customer.logout ();
         } );
 
     }

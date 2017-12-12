@@ -18,9 +18,11 @@ public class Driver extends Application {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Driver loaded");
 
+            //Create a connection
             Utilities.createConnnection();
             Utilities.createStatement();
 
+            //Launch the display
             launch ( args );
 
             // Close the connection
@@ -41,19 +43,13 @@ public class Driver extends Application {
     }
 
     @Override
+    /**
+     * Display the entry window
+     */
     public void start(Stage primaryStage) {
 
        EntryWindow.display ();
 
     }
-
-    public static void logout(){
-        Customer.userID = 0;
-        Customer.fullName = "";
-        Customer.adminBool = false;
-        Customer.adminCheck = 0;
-
-        EntryWindow.display ();
-        }
 
 }

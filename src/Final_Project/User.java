@@ -2,6 +2,7 @@ package Final_Project;
 
 abstract class User {
 
+    //The properties each user, customer, and admin have upon registration and in the DB
     private String firstName;
     private String lastName;
     private String addressLine;
@@ -15,6 +16,7 @@ abstract class User {
     private String secAnswer;
     private boolean isReturning;
 
+    //Normal getters and setters
     public String getFirstName() {
         return firstName;
     }

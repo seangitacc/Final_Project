@@ -152,7 +152,7 @@ class MainMenu {
 
         logout.setOnAction ( e ->{
             MainMenu.close();
-            Driver.logout ();
+            Customer.logout ();
         } );
 
         manageFlights.setOnAction ( e-> ManageAllFlights.display ());

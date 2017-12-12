@@ -1,12 +1,16 @@
 package Final_Project;
 
 import javafx.scene.control.Alert;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class Admin extends Customer {
 
+
+    /**
+     * Admins are able to delete a flight by inputting a flight's ID.
+     * @param input
+     */
     public static void deleteFlight(String input){
         try{
 
@@ -20,13 +24,7 @@ public class Admin extends Customer {
 
             ps.execute();
 
-            String incrementQuery = "UPDATE flights\n" +
-                    "SET flights_seats = flights_seats + 1\n" +
-                    "Where flight_id = ?";
-            PreparedStatement incrementCount = Utilities.connection.prepareStatement(incrementQuery);
-            incrementCount.setInt(1, flightID);
-            incrementCount.execute();
-
+            //Inform the user the flight was deleted
             Alert alert = new Alert ( Alert.AlertType.INFORMATION );
             alert.setTitle ( "Information" );
             alert.setHeaderText ( "Flight Deletion" );
@@ -49,6 +47,14 @@ public class Admin extends Customer {
         }
     }
 
+    /**
+     * An admin is able to add a new flight by inputting flight details.
+     * @param fromCity
+     * @param toCity
+     * @param departDate
+     * @param flightTime
+     * @param flightPrice
+     */
     public static void addNewFlight(String fromCity, String toCity, String departDate, String flightTime, String flightPrice){
 
         try{
@@ -64,6 +70,7 @@ public class Admin extends Customer {
 
                 ps.execute();
 
+                //Let the user know the flight was successfully created
                 Alert alert = new Alert ( Alert.AlertType.INFORMATION );
                 alert.setTitle ( "Information" );
                 alert.setHeaderText ( "Flight Creation" );
@@ -87,6 +94,12 @@ public class Admin extends Customer {
 
     }
 
+    /**
+     * Be able to search for a specific flight so that the flight information can pre-populate
+     * the update scene.
+     * @param flightID
+     * @return f1
+     */
     public static Flight searchUpdateFlights(int flightID){
 
         Flight f1 = new Flight();
@@ -104,6 +117,8 @@ public class Admin extends Customer {
                 f1 = new Flight(Integer.parseInt(count.getString(1)), count.getString(2), count.getString(3),
                         count.getString(4), count.getString(5), Double.parseDouble(count.getString(6)));
             }else{
+
+                //Need to pass a flight to handle an instance where a user may input an incorrect flight ID
                 f1 = new Flight(0 , "A", "B", "C", "D", 1.0);
             }
 
@@ -123,6 +138,15 @@ public class Admin extends Customer {
         return f1;
     }
 
+    /**
+     * An admin is able to update a flight using the flight's details and modifying them any way they may need to.
+     * @param fromCity
+     * @param toCity
+     * @param departDate
+     * @param flightTime
+     * @param flightPrice
+     * @param flightId
+     */
     public static void updateFlight(String fromCity, String toCity, String departDate, String flightTime, String flightPrice, int flightId){
 
         System.out.println(fromCity);
@@ -147,6 +171,7 @@ public class Admin extends Customer {
 
             ps.executeUpdate();
 
+            //Let the user know they successfully updated a flight
             Alert alert = new Alert ( Alert.AlertType.INFORMATION );
             alert.setTitle ( "Information" );
             alert.setHeaderText ( "Flight Update" );

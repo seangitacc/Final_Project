@@ -82,7 +82,7 @@ class ManageAllFlights {
 
             manageFlightStage.close();
             MainMenu.close();
-            Driver.logout ();
+            Customer.logout ();
         } );
 
         delete.setOnAction ( e->{

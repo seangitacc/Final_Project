@@ -1,6 +1,6 @@
 package Final_Project;
 
-interface returningUser {
+interface returningUser {//Interface defines that a returningUser can log in and log out
 
     static void login(){
 

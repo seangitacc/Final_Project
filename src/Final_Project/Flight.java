@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Flight {
 
+    //These all needed to be properties so that they mapped correctly to our table view
     private SimpleIntegerProperty flightId;
     private SimpleStringProperty fromCity;
     private SimpleStringProperty toCity;
@@ -16,9 +17,11 @@ public class Flight {
     private SimpleStringProperty flightTime;
     private SimpleDoubleProperty flightPrice;
 
+    //Default constructor
     public Flight(){
     }
 
+    //Constructor used to create a new flight
     public Flight(int flightId, String fromCity, String toCity, String flightDate, String flightTime, double flightPrice){
 
         this.flightId = new SimpleIntegerProperty(flightId);
@@ -29,13 +32,12 @@ public class Flight {
         this.flightPrice = new SimpleDoubleProperty(flightPrice);
     }
 
+    //Normal getters and setters for our properties above
     public int getFlightId() {
         return flightId.get();
     }
 
-    public SimpleIntegerProperty flightIdProperty() {
-        return flightId;
-    }
+    public SimpleIntegerProperty flightIdProperty() { return flightId; }
 
     public void setFlightId(int flightId) {
         this.flightId.set(flightId);
