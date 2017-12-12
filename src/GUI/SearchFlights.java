@@ -1,7 +1,6 @@
 package GUI;
 
 import Final_Project.Customer;
-import Final_Project.Driver;
 import Final_Project.Utilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
