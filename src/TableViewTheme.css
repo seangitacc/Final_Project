@@ -1,0 +1,15 @@
+.root{
+    -fx-background-color: #383838;
+}
+.button{
+    -fx-background-color: #ab4642;
+}
+.text-field{
+    -fx-background-color: #e8e8e8;
+    -fx-background-size: 6pt;
+    -fx-background-radius: 0;
+}
+.table-view{
+    -fx-background-color: #e8e8e8;
+    -fx-text-fill: #FFFFFF;
+}
