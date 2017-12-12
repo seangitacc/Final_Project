@@ -61,15 +61,18 @@ public class Driver extends Application {
         }
     }
 
+    //Splash screen image
     public static final String SPLASH_IMAGE =
             "https://i.imgur.com/gLcHRXZ.png";
 
+    //Splash screen layout
     private Pane splashLayout;
     private ProgressBar loadProgress;
     private Label progressText;
     private static final int SPLASH_WIDTH = 676;
     private static final int SPLASH_HEIGHT = 300;
 
+    //Defines splash screen look and feel
     @Override
     public void init() {
         ImageView splash = new ImageView(new Image(
@@ -99,6 +102,7 @@ public class Driver extends Application {
         splashLayout.setEffect(new DropShadow());
     }
 
+    //Function that runs the splash screen
     @Override
     public void start(final Stage initStage) throws Exception {
         final Task<ObservableList<String>> loadTask = new Task<ObservableList<String>>() {
@@ -134,6 +138,7 @@ public class Driver extends Application {
         new Thread(loadTask).start();
     }
 
+    //Function that is called to show the splash screen
     private void showSplash(
             final Stage initStage,
             Task<?> task,
