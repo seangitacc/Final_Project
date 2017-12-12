@@ -43,7 +43,6 @@ public class EntryWindow {
 
 
         entryScene = new Scene ( vb , 1250  ,  700);
-
         entryScene.getStylesheets ().add ( "Theme.css" );
 
         EntryWindow.setScene ( entryScene );

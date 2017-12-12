@@ -120,7 +120,6 @@ public class Customer extends User implements newUser, returningUser {
                 alert.setTitle ( "Warning" );
                 alert.setHeaderText ( "Invalid Input!" );
                 alert.setContentText ( "Please Enter Correct Username and Password" );
-
                 alert.showAndWait ();
             }
 

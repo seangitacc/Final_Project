@@ -76,6 +76,9 @@ class forgotPasswordWindow {
         Scene scene1 = new Scene(grid1, 350,200);
         Scene scene2 = new Scene(grid2, 350,200);
 
+        scene1.getStylesheets ().add ( "Theme.css" );
+        scene2.getStylesheets ().add ( "Theme.css" );
+
         retrieveQuestion.setOnAction ( e -> {
 
                if(Customer.checkUser(usInput.getText(), ssnInput.getText())) {

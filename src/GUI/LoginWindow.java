@@ -78,7 +78,7 @@ class LoginWindow {
         vb.setAlignment ( Pos.CENTER );
         Scene LoginScene = new Scene ( vb,400,300 );
 
-
+        LoginScene.getStylesheets().add( "Theme.css" );
         LoginWindow.setScene ( LoginScene );
         LoginWindow.show();
 

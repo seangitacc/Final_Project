@@ -148,6 +148,8 @@ class SearchFlights {
 
         TableView<Flight> flightTableView = new TableView ();
 
+        flightTableView.setStyle("-fx-text-fill: #383838");
+
         Button addFlight = new Button("Add Flight");
         addFlight.setAlignment ( Pos.BOTTOM_RIGHT );
 
@@ -170,12 +172,12 @@ class SearchFlights {
 
             if(departDate.getValue() == null) {
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Alert alert = new Alert( Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
                 alert.setHeaderText("Flight Search");
                 alert.setContentText("You have entered an incorrect value!");
 
-                alert.showAndWait();
+                alert.show();
             }else{
 
                 if(from.getValue() == null && to.getValue() == null){

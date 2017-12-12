@@ -75,6 +75,7 @@ class MainMenu {
         grid.getChildren ().addAll ( header,user,searchButton, manageMyFlights, logout);
 
        Scene scene = new Scene ( grid,1250,700 );
+       scene.getStylesheets ().add ( "Theme.css" );
 
        stage.setTitle ( "AyrLyne" );
        stage.setScene ( scene );
@@ -121,6 +122,7 @@ class MainMenu {
 
         Scene manageMyFlightScene = new Scene(vb,1250,700);
         Stage manageMyFlightStage = new Stage();
+        manageMyFlightScene.getStylesheets ().add ( "Theme.css" );
         manageMyFlightStage.setTitle("Manage My Flights");
         manageMyFlightStage.setScene(manageMyFlightScene);
 
@@ -164,8 +166,6 @@ class MainMenu {
 
         stage.close();
     }
-
-
 }
 
 
