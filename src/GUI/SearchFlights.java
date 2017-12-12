@@ -29,6 +29,7 @@ class SearchFlights {
 
     public static void display() {
 
+        //declare and set variables
         Stage searchFlightStage = new Stage ();
         searchFlightStage.setTitle ( "AyrLyne-Search Flights" );
 
@@ -40,7 +41,6 @@ class SearchFlights {
         Label departtf = new Label ( "Date of Departure" );
         DatePicker departDate = new DatePicker ();
         Button search = new Button("Search");
-
 
         Button homeButton = new Button ( "Home" );
         Button logout = new Button ( "Logout" );
@@ -54,11 +54,12 @@ class SearchFlights {
         user.setStyle ( "-fx-text-fill: #e8e8e8" );
 
         title.setFont ( new Font ( "Helvetica", 36 ) );
-
         from.setPromptText ( "Atlanta (ATL)" );
         to.setPromptText ( "San Fransisco (SFO)" );
-
         departDate.setStyle ( "-fx-text-fill: #383838" );
+        departDate.setPromptText ( "" + LocalDate.now() );
+        departDate.setMaxSize ( 200, 10 );
+
         from.getItems ().addAll (
                 "Atlanta (ATL)",
                 "San Fransisco (SFO)",
@@ -66,8 +67,8 @@ class SearchFlights {
                 "New York (JFK)",
                 "Dallas (DFW)",
                 "Chicago (ORD)"
-                //use database to populate
         );
+
         to.getItems ().addAll (
                 "Atlanta (ATL)",
                 "San Fransisco (SFO)",
@@ -75,16 +76,9 @@ class SearchFlights {
                 "New York (JFK)",
                 "Dallas (DFW)",
                 "Chicago (ORD)"
-
-                //use database to populate --------------------------
         );
 
-
-        departDate.setPromptText ( "" + LocalDate.now() );
-
-        departDate.setMaxSize ( 200, 10 );
-
-
+        //set pane and add nodes to pane
         GridPane grid = new GridPane ();
 
         grid.setPadding ( new Insets ( 25 ) );
@@ -111,7 +105,6 @@ class SearchFlights {
         GridPane.setConstraints ( departDate, 2, 7 );
         GridPane.setConstraints ( search,2,11 );
 
-
         grid.getChildren ().addAll ( fromL, from, toL, to, departtf, departDate, search);
         grid2.getChildren ().addAll ( title, user, homeButton, logout );
 
@@ -125,7 +118,7 @@ class SearchFlights {
 
         scene.getStylesheets ().add("TableViewTheme.css");
 
-
+        //create table
         TableColumn<Flight, Integer> flightIdColumn = new TableColumn<>("Flight ID");
         flightIdColumn.setPrefWidth( 100 );
         flightIdColumn.setCellValueFactory (new PropertyValueFactory<>("flightId") );
@@ -152,8 +145,6 @@ class SearchFlights {
 
         TableView<Flight> flightTableView = new TableView ();
 
-
-
         Button addFlight = new Button("Add Flight");
         addFlight.setAlignment ( Pos.BOTTOM_RIGHT );
 
@@ -165,6 +156,7 @@ class SearchFlights {
 
         scene2.getStylesheets ().add("TableViewTheme.css");
 
+        //assign panes/tables to scene. add scene to stage and display stage
         Stage chooseFlight = new Stage ();
         chooseFlight.initModality ( Modality.APPLICATION_MODAL );
         chooseFlight.setTitle ( "Choose Flight" );
@@ -173,6 +165,8 @@ class SearchFlights {
         DateTimeFormatter dt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         flightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn, flightPriceColumn);
+
+        //event handlers via lambda
 
         search.setOnAction ( e-> {
 
@@ -259,9 +253,6 @@ class SearchFlights {
 
         }
 
-
         return flights;
     }
-
 }
-

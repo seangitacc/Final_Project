@@ -20,6 +20,7 @@ class MainMenu {
 
     public static void display() {
 
+        //declare variables
         Label header = new Label ( "AyrLyne" );
         Button searchButton = new Button ( "Search Flights" );
         Button logout = new Button ( "Logout" );
@@ -30,11 +31,11 @@ class MainMenu {
 
         header.setFont ( new Font ( "Helvetica", 36 ) );
 
+        //assign nodes to pane and pane to scene and show stage
         grid.setAlignment ( Pos.CENTER_LEFT );
         grid.setPadding ( new Insets ( 25 ) );
         grid.setHgap ( 15 );
         grid.setVgap ( 25 );
-
 
         GridPane.setConstraints ( header, 0, 0 );
         GridPane.setConstraints ( user, 0, 3 );
@@ -50,11 +51,11 @@ class MainMenu {
 
         Scene mainMenuScene = new Scene ( grid, 1250, 700 );
         mainMenuScene.getStylesheets ().add ( "Theme.css" );
-
         stage.setTitle ( "AyrLyne" );
         stage.setScene ( mainMenuScene );
         stage.show ();
 
+        //event handlers via lambda
         searchButton.setOnAction ( e -> SearchFlights.display () );
 
         manageMyFlight.setOnAction ( e-> ManageMyFlights.display ());

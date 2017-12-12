@@ -25,13 +25,14 @@ class ManageAllFlights {
 
     public static void display(){
 
-
+        //declare variables
         manageFlightStage.setTitle ( "AyrLyne" );
 
         Label title = new Label ( "Manage Flights - Admin Console" );
         Button add = new Button("Add Flight");
         Button delete = new Button("Delete Flight");
         Button update = new Button("Update Flight");
+        GridPane grid = new GridPane ();
 
         Button homeButton = new Button ( "Home" );
         Button logout = new Button ( "Logout" );
@@ -40,8 +41,7 @@ class ManageAllFlights {
 
         title.setFont ( new Font ( "Helvetica", 36 ) );
 
-        GridPane grid = new GridPane ();
-
+        //set panes and assign nodes to pane
         grid.setPadding ( new Insets ( 25 ) );
         grid.setVgap ( 10 );
         grid.setHgap ( 10 );
@@ -69,23 +69,24 @@ class ManageAllFlights {
 
         vb.getChildren ().addAll ( grid,grid2 );
 
+        //set scene and style and assign to stage. show stage
         Scene scene = new Scene ( vb, 1250,700 );
 
         scene.getStylesheets ().add("Theme.css");
 
+        manageFlightStage.setScene (scene);
+        manageFlightStage.show ();
 
-       manageFlightStage.setScene (scene);
-       manageFlightStage.show ();
-
+        //event handler via lambda
         homeButton.setOnAction ( e-> manageFlightStage.close());
 
         logout.setOnAction ( e ->{
-
             manageFlightStage.close();
             MainMenu.close();
             Customer.logout ();
         } );
 
+        //delete flight event
         delete.setOnAction ( e->{
 
            Label header = new Label("Delete Flight");
@@ -101,11 +102,11 @@ class ManageAllFlights {
            g.setVgap ( 25 );
            g.setPadding ( new Insets ( 25 ) );
 
-            GridPane.setConstraints ( flightId,0,0 );
-            GridPane.setConstraints ( flightInput,1,0 );
-            GridPane.setConstraints ( del,1,1 );
+           GridPane.setConstraints ( flightId,0,0 );
+           GridPane.setConstraints ( flightInput,1,0 );
+           GridPane.setConstraints ( del,1,1 );
 
-            g.getChildren ().addAll (flightId,flightInput,del  );
+           g.getChildren ().addAll (flightId,flightInput,del  );
 
            VBox v = new VBox ( 15 );
            v.setPadding ( new Insets ( 25 ) );
@@ -120,7 +121,7 @@ class ManageAllFlights {
            s1.setTitle ( "Delete Flight" );
            s1.show();
 
-            del.setOnAction ( e1 ->{
+           del.setOnAction ( e1 ->{
 
                 if(flightInput.getText().matches("[A-Za-z]")){
                     Alert alert = new Alert ( Alert.AlertType.INFORMATION );
@@ -137,6 +138,7 @@ class ManageAllFlights {
             } );
         } );
 
+        //add flight event
         add.setOnAction ( e -> {
 
             Stage z = new Stage ();
@@ -164,7 +166,6 @@ class ManageAllFlights {
             departtf.setStyle ( "-fx-text-fill: #e8e8e8" );
             flightTime.setStyle ( "-fx-text-fill: #e8e8e8" );
             flightPrice.setStyle ( "-fx-text-fill: #e8e8e8" );
-
 
             from.getItems ().addAll (
                     "Atlanta (ATL)",
@@ -206,7 +207,6 @@ class ManageAllFlights {
             grid4.setVgap ( 25 );
             grid4.setAlignment ( Pos.CENTER );
 
-
             Scene s = new Scene(grid4, 650,500);
             s.getStylesheets ().add ( "TableViewTheme.css" );
             z.setScene ( s );
@@ -231,9 +231,9 @@ class ManageAllFlights {
 
                     }
                 });
-
         } );
 
+        //update flight event
         update.setOnAction ( e -> {
 
             Label header = new Label("Update Flight");
@@ -387,18 +387,9 @@ class ManageAllFlights {
                             s2.close();
 
                         });
-
-
                     }
-
                 }
-
-
             });
-
-
-
         } );
-
     }
 }

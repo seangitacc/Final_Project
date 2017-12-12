@@ -24,15 +24,13 @@ class forgotPasswordWindow {
         forgotPasswordWindow.setTitle ( "Forgot Password" );
         forgotPasswordWindow.initModality ( Modality.APPLICATION_MODAL );
 
-        //
+        //declare nodes
         Label enterun = new Label("Enter Username: ");
         Label enterssn = new Label("Enter SSN: ");
         TextField usInput = new TextField (  );
         TextField ssnInput = new TextField (  );
         Button retrieveQuestion = new Button("Retrieve Security Question");
         Button back = new Button("Back");
-
-
 
         Label questionL = new Label ("Question: " );
         Label questiontf = new Label("<question here>");
@@ -41,8 +39,7 @@ class forgotPasswordWindow {
         Button retrievePassword = new Button("Retrieve Password");
         Button back1 = new Button("Back");
 
-
-
+        //setpanes
         GridPane grid1 = new GridPane();
         grid1.setPadding(new Insets ( 25 ));
         grid1.setVgap ( 8 );
@@ -70,6 +67,7 @@ class forgotPasswordWindow {
         GridPane.setConstraints ( retrievePassword,1,3 );
         GridPane.setConstraints ( back1,0,3);
 
+        //add nodes to panes, pane to scene, scene to stage
         grid1.getChildren ().addAll ( enterun,enterssn,usInput,ssnInput, back, retrieveQuestion );
         grid2.getChildren ().addAll( questionL,questiontf, ans, answer, retrievePassword,back1);
 
@@ -79,6 +77,7 @@ class forgotPasswordWindow {
         scene1.getStylesheets ().add ( "Theme.css" );
         scene2.getStylesheets ().add ( "Theme.css" );
 
+        //event handler methods via lambda
         retrieveQuestion.setOnAction ( e -> {
 
                if(Customer.checkUser(usInput.getText(), ssnInput.getText())) {

@@ -20,6 +20,7 @@ class RegisterWindow {
 
     public static void dispaly() {
 
+        //declare variables
         Stage RegisterWindow = new Stage ();
         RegisterWindow.setTitle ( "Register" );
         RegisterWindow.initModality ( Modality.APPLICATION_MODAL );
@@ -53,96 +54,14 @@ class RegisterWindow {
         TextField sqtf = new TextField ();
         TextField anstf = new TextField ();
         CheckBox adminCheck = new CheckBox (  );
-
         Button backButton = new Button("Back");
         Button submitButton = new Button("Submit");
 
-
-        backButton.setOnAction ( e -> RegisterWindow.close() );
-
-        adminCheck.setOnAction((event) -> {
-                    if (adminCheck.isSelected()) {
-
-                        TextInputDialog dialog = new TextInputDialog(null);
-                        dialog.setTitle("Admin Security Password");
-                        dialog.setHeaderText(null);
-                        dialog.setContentText("Enter Master Password: ");
-
-                        Optional<String> result = dialog.showAndWait();
-                        result.ifPresent(s -> {
-                            if (s.equals(Customer.adminPassword)) {
-
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setTitle("Information");
-                                alert.setHeaderText("Correct password!");
-                                alert.setContentText("Welcome, administrator!");
-                                Customer.adminBool = true;
-                                alert.showAndWait();
-                            } else {
-                                Alert alert = new Alert(Alert.AlertType.ERROR);
-                                alert.setTitle("Error");
-                                alert.setHeaderText("Invalid Password!");
-                                alert.setContentText("We will now uncheck the admin box for you.");
-
-                                alert.showAndWait();
-
-                                adminCheck.setSelected(false);
-                            }
-                        });
-                        adminCheck.setSelected( Customer.adminBool);
-                    }
-
-                });
-
-        submitButton.setOnAction ( e -> {
-
-                  if (fntf.getText ().equals("") || lntf.getText ().equals("") || adrstf.getText ().equals("") || ziptf.getText().equals("")
-                        || sttf.getText().equals("") || untf.getText ().equals("")|| pwtf.getText ().equals("") || emailtf.getText ().equals("")
-                        || ssntf.getText ().equals("") || sqtf.getText ().equals("") ||  anstf.getText ().equals("")) {
-
-                      Alert alert = new Alert ( Alert.AlertType.INFORMATION );
-                      alert.setTitle ( "Warning" );
-                      alert.setHeaderText ( "Invalid Input!" );
-                      alert.setContentText ( "You have some null values!" );
-
-                      alert.showAndWait ();
-
-                  }else {
-
-                      //Check to see if confirm and password match
-                      if (pwtf.getText ().equals ( cpwtf.getText () )) {
-
-                          Customer.register ( fntf.getText (), lntf.getText (), adrstf.getText (), ziptf.getText (), sttf.getText (), untf.getText (), pwtf.getText (), emailtf.getText (),
-                                  ssntf.getText (), sqtf.getText (), anstf.getText () );
-
-                          Alert alert = new Alert ( Alert.AlertType.INFORMATION );
-                          alert.setTitle ( "Succesfully Created Account" );
-                          alert.setHeaderText ( "Woohoo!" );
-                          alert.setContentText ( "Click 'OK' to log in." );
-
-                          alert.showAndWait ();
-
-                          RegisterWindow.close ();
-
-                      } else {
-
-                          Alert alert = new Alert ( Alert.AlertType.INFORMATION );
-                          alert.setTitle ( "Warning" );
-                          alert.setHeaderText ( "Invalid Input!" );
-                          alert.setContentText ( "Your passwords do not match!" );
-
-                          alert.showAndWait ();
-
-                      }
-
-                  }
-              });
-
+        //assign nodes to panes
         GridPane grid = new GridPane ();
         grid.setPadding(new Insets ( 25 ));
         grid.setVgap ( 8 );
         grid.setHgap ( 10 );
-
 
         GridPane.setConstraints ( fnl,0,0 );
         GridPane.setConstraints ( lnl,0,1 );
@@ -180,13 +99,94 @@ class RegisterWindow {
         vb.setPadding ( new Insets ( 25 ) );
         vb.getChildren ().addAll ( header,grid );
 
+        //assign style and pane to scene; and scene to stage. Display stage
         Scene registerScene = new Scene ( vb, 550,650 );
 
         registerScene.getStylesheets ().add("Theme.css");
 
         RegisterWindow.setScene ( registerScene);
-        RegisterWindow.showAndWait ();
+        RegisterWindow.show();
 
+        //event handlers via lambda
+        backButton.setOnAction ( e -> RegisterWindow.close() );
+
+        adminCheck.setOnAction((event) -> {
+            if (adminCheck.isSelected()) {
+
+                TextInputDialog dialog = new TextInputDialog(null);
+                dialog.setTitle("Admin Security Password");
+                dialog.setHeaderText(null);
+                dialog.setContentText("Enter Master Password: ");
+
+                Optional<String> result = dialog.showAndWait();
+                result.ifPresent(s -> {
+                    if (s.equals(Customer.adminPassword)) {
+
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Information");
+                        alert.setHeaderText("Correct password!");
+                        alert.setContentText("Welcome, administrator!");
+                        Customer.adminBool = true;
+                        alert.showAndWait();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Invalid Password!");
+                        alert.setContentText("We will now uncheck the admin box for you.");
+
+                        alert.showAndWait();
+
+                        adminCheck.setSelected(false);
+                    }
+                });
+                adminCheck.setSelected( Customer.adminBool);
+            }
+
+        });
+
+        submitButton.setOnAction ( e -> {
+
+            if (fntf.getText ().equals("") || lntf.getText ().equals("") || adrstf.getText ().equals("") || ziptf.getText().equals("")
+                    || sttf.getText().equals("") || untf.getText ().equals("")|| pwtf.getText ().equals("") || emailtf.getText ().equals("")
+                    || ssntf.getText ().equals("") || sqtf.getText ().equals("") ||  anstf.getText ().equals("")) {
+
+                Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                alert.setTitle ( "Warning" );
+                alert.setHeaderText ( "Invalid Input!" );
+                alert.setContentText ( "You have some null values!" );
+
+                alert.showAndWait ();
+
+            }else {
+
+                //Check to see if confirm and password match
+                if (pwtf.getText ().equals ( cpwtf.getText () )) {
+
+                    Customer.register ( fntf.getText (), lntf.getText (), adrstf.getText (), ziptf.getText (), sttf.getText (), untf.getText (), pwtf.getText (), emailtf.getText (),
+                            ssntf.getText (), sqtf.getText (), anstf.getText () );
+
+                    Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                    alert.setTitle ( "Succesfully Created Account" );
+                    alert.setHeaderText ( "Woohoo!" );
+                    alert.setContentText ( "Click 'OK' to log in." );
+
+                    alert.showAndWait ();
+
+                    RegisterWindow.close ();
+
+                } else {
+
+                    Alert alert = new Alert ( Alert.AlertType.INFORMATION );
+                    alert.setTitle ( "Warning" );
+                    alert.setHeaderText ( "Invalid Input!" );
+                    alert.setContentText ( "Your passwords do not match!" );
+
+                    alert.showAndWait ();
+
+                }
+
+            }
+        });
 
     }
 

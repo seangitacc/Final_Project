@@ -22,13 +22,12 @@ class LoginWindow {
     public static void display() {
 
 
+        //declare properties
         Stage LoginWindow = new Stage();
         LoginWindow.setTitle ( "Login" );
         LoginWindow.initModality ( Modality.APPLICATION_MODAL );
 
         Label header = new Label("Login");
-        header.setFont ( new Font ( "Helvetica", 36 ) );
-
         TextField usernametf = new TextField ( );
         usernametf.setPromptText ( "username" );
         TextField passwordtf = new TextField ( );
@@ -39,30 +38,11 @@ class LoginWindow {
         Button forgotPassword = new Button("Forgot Password");
         Button back = new Button("Back");
 
-
-        back.setOnAction ( e -> LoginWindow.close() );
-        forgotPassword.setOnAction ( e -> forgotPasswordWindow.display () );
-        login.setOnAction ( e -> {
-
-            //SearchFlights.display ();
-
-            String username = usernametf.getText ();
-            String password = passwordtf.getText();
-            Customer.login ( username,password );
-
-            if(Customer.userID != 0){
-                LoginWindow.close();
-                EntryWindow.close ();
-                MainMenu.display();
-
-            }
-
-        } );
-
-
+        header.setFont ( new Font ( "Helvetica", 36 ) );
         usernametf.setMaxWidth ( 200 );
         passwordtf.setMaxWidth ( 200 );
 
+        //declare pane
         HBox hb = new HBox(20);
         hb.getChildren ().addAll (back,forgotPassword,login );
         GridPane grid = new GridPane ();
@@ -83,10 +63,28 @@ class LoginWindow {
         hb.setAlignment ( Pos.CENTER );
         Scene LoginScene = new Scene ( vb,400,300 );
 
+        //set panes to scene
         LoginScene.getStylesheets().add( "Theme.css" );
         LoginWindow.setScene ( LoginScene );
         LoginWindow.show();
 
+        //event handler functions via lambda
+        back.setOnAction ( e -> LoginWindow.close() );
+        forgotPassword.setOnAction ( e -> forgotPasswordWindow.display () );
+        login.setOnAction ( e -> {
+
+            String username = usernametf.getText ();
+            String password = passwordtf.getText();
+            Customer.login ( username,password );
+
+            if(Customer.userID != 0){
+                LoginWindow.close();
+                EntryWindow.close ();
+                MainMenu.display();
+
+            }
+
+        } );
     }
 
 }

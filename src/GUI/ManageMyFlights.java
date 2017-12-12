@@ -24,6 +24,7 @@ public class ManageMyFlights {
 
     public static void display(){
 
+        //declare variables
         TableColumn<Flight, Integer> flightIdColumn = new TableColumn<>("Flight ID");
         flightIdColumn.setPrefWidth( 100 );
         flightIdColumn.setCellValueFactory (new PropertyValueFactory<> ("flightId") );
@@ -52,21 +53,19 @@ public class ManageMyFlights {
         searchFlightTableView.setItems (Customer.searchMyFlights(Customer.userID));
 
         Label title = new Label ( "Manage My Flights" );
-        title.setFont ( new Font ( "Helvetica", 36 ) );
-        title.setStyle ( "-fx-text-fill: #e8e8e8" );
-
         Button homeButton = new Button ( "Home" );
         Button log = new Button ( "Logout" );
+
+        title.setFont ( new Font ( "Helvetica", 36 ) );
+        title.setStyle ( "-fx-text-fill: #e8e8e8" );
         Label user1 = new Label ( "Hello, " + Customer.fullName);
         user1.setStyle ( "-fx-text-fill: #e8e8e8" );
 
-
-
+        //set pane and add nodes to pane
         GridPane g = new GridPane ();
         g.setPadding ( new Insets ( 25 ) );
         g.setHgap ( 15 );
         g.setVgap ( 10 );
-
 
         GridPane.setConstraints ( title, 0, 0 );
         GridPane.setConstraints ( user1, 25, 0 );
@@ -86,6 +85,7 @@ public class ManageMyFlights {
         VBox vb = new VBox(20);
         vb.getChildren().addAll(g,searchFlightTableView, hb);
 
+        //set scene and add panes. set stage and display stage
         Scene manageMyFlightScene = new Scene(vb,1250,700);
         Stage manageMyFlightStage = new Stage();
         manageMyFlightStage.setTitle("Manage My Flights");
@@ -98,10 +98,9 @@ public class ManageMyFlights {
 
         searchFlightTableView.getColumns().addAll (flightIdColumn, fromCityColumn,toCityColumn, flightDateColumn, flightTimeColumn, flightPriceColumn);
 
-
         manageMyFlightStage.show();
 
-
+        //event handlers via lambda
         deleteFlight.setOnAction(e -> {Flight selectedFlight = searchFlightTableView.getSelectionModel().getSelectedItem();
 
             Customer.deleteFlight ( selectedFlight.getFlightId (), Customer.userID );
