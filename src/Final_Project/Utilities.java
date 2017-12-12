@@ -10,7 +10,6 @@ public class Utilities {
     private static final String user = "root"; //Used to connect to the DB
     private static final String passwd = "gr8isc00l"; //Used to connect to the DB
     public static Connection connection; //Used to create a connection to the DB
-    private static Statement statement; //Used to create a statement to run against the DB
 
     /**
      * Create a connection to the DB
@@ -46,7 +45,7 @@ public class Utilities {
 
         try{
 
-            statement = connection.createStatement();
+            Statement statement = connection.createStatement();
 
         }catch(Exception ex){
 
