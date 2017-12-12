@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,6 +24,9 @@ class LoginWindow {
         Stage LoginWindow = new Stage();
         LoginWindow.setTitle ( "Login" );
         LoginWindow.initModality ( Modality.APPLICATION_MODAL );
+
+        Label header = new Label("Login");
+        header.setFont ( new Font ( "Helvetica", 36 ) );
 
         TextField usernametf = new TextField ( );
         usernametf.setPromptText ( "username" );
@@ -72,10 +76,10 @@ class LoginWindow {
         grid.getChildren ().setAll ( usernamel,usernametf,passwordl,passwordtf);
 
         VBox vb = new VBox ( 20 );
-        vb.getChildren ().addAll ( grid,hb);
+        vb.getChildren ().addAll ( header, grid,hb);
+        vb.setPadding ( new Insets ( 25 ) );
         grid.setAlignment ( Pos.CENTER );
         hb.setAlignment ( Pos.CENTER );
-        vb.setAlignment ( Pos.CENTER );
         Scene LoginScene = new Scene ( vb,400,300 );
 
         LoginScene.getStylesheets().add( "Theme.css" );

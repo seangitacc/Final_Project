@@ -6,6 +6,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -22,6 +24,8 @@ class RegisterWindow {
         RegisterWindow.setTitle ( "Register" );
         RegisterWindow.initModality ( Modality.APPLICATION_MODAL );
 
+        Label header = new Label("Register");
+        header.setFont ( new Font ( "Helvetica", 36 ) );
 
         Label fnl = new Label ( "First Name: " );
         Label lnl = new Label ( "Last Name: " );
@@ -170,9 +174,15 @@ class RegisterWindow {
         GridPane.setConstraints ( submitButton,3,14 );
 
         grid.getChildren ().addAll ( fnl,lnl,adrsl,zipl,stl,unl,pwl, cpwl,emaill,ssnl,sql,fntf,lntf,adrstf,ziptf,sttf,untf,pwtf, cpwtf, emailtf,ssntf,sqtf,ans, anstf, backButton,submitButton,admin,adminCheck );
-
         grid.setAlignment ( Pos.CENTER );
-        Scene registerScene = new Scene ( grid, 550,650 );
+
+        VBox vb = new VBox ( 20 );
+        vb.setPadding ( new Insets ( 25 ) );
+        vb.getChildren ().addAll ( header,grid );
+
+        Scene registerScene = new Scene ( vb, 550,650 );
+
+        registerScene.getStylesheets ().add("Theme.css");
 
         RegisterWindow.setScene ( registerScene);
         RegisterWindow.showAndWait ();

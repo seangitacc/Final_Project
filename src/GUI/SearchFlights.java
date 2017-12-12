@@ -121,6 +121,8 @@ class SearchFlights {
 
         Scene scene = new Scene ( vb, 1250, 700 );
 
+        scene.getStylesheets ().add("Theme.css");
+
 
         TableColumn<Flight, Integer> flightIdColumn = new TableColumn<>("Flight ID");
         flightIdColumn.setPrefWidth( 100 );
@@ -148,7 +150,7 @@ class SearchFlights {
 
         TableView<Flight> flightTableView = new TableView ();
 
-        flightTableView.setStyle("-fx-text-fill: #383838");
+
 
         Button addFlight = new Button("Add Flight");
         addFlight.setAlignment ( Pos.BOTTOM_RIGHT );
@@ -158,6 +160,8 @@ class SearchFlights {
         vb1.getChildren ().addAll (flightTableView, addFlight);
 
         Scene scene2 = new Scene(vb1,800,600);
+
+        scene2.getStylesheets ().add("TableViewTheme.css");
 
         Stage chooseFlight = new Stage ();
         chooseFlight.initModality ( Modality.APPLICATION_MODAL );

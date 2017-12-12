@@ -72,6 +72,8 @@ class ManageAllFlights {
 
         Scene scene = new Scene ( vb, 1250,700 );
 
+        scene.getStylesheets ().add("Theme.css");
+
 
        manageFlightStage.setScene (scene);
        manageFlightStage.show ();
@@ -87,16 +89,34 @@ class ManageAllFlights {
 
         delete.setOnAction ( e->{
 
+           Label header = new Label("Delete Flight");
+           header.setFont ( new Font ( "Helvetica", 36 ) );
+
+           Label flightId = new Label ( "Enter Flight ID" );
            TextField flightInput = new TextField ( );
-           flightInput.setPromptText ( "Enter Flight Id" );
+
            Button del = new Button("Delete Flight");
 
-           VBox v = new VBox ( 25 );
+           GridPane g = new GridPane ();
+           g.setHgap ( 10 );
+           g.setVgap ( 25 );
+           g.setPadding ( new Insets ( 25 ) );
 
-           v.getChildren ().addAll ( flightInput,del );
+            GridPane.setConstraints ( flightId,0,0 );
+            GridPane.setConstraints ( flightInput,1,0 );
+            GridPane.setConstraints ( del,1,1 );
 
-           Scene s = new Scene ( v, 300,200 );
+            g.getChildren ().addAll (flightId,flightInput,del  );
+
+           VBox v = new VBox ( 15 );
+           v.setPadding ( new Insets ( 25 ) );
+
+           v.getChildren ().addAll ( header,g );
+
+           Scene s = new Scene ( v, 600,250 );
+           s.getStylesheets ().add ( "Theme.css" );
            Stage s1 = new Stage (  );
+
            s1.setScene ( s );
            s1.setTitle ( "Delete Flight" );
            s1.show();
@@ -181,6 +201,7 @@ class ManageAllFlights {
 
 
             Scene s = new Scene(grid4, 600,500);
+            s.getStylesheets ().add ( "Theme.css" );
             z.setScene ( s );
             z.show ();
 
