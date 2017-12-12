@@ -118,12 +118,6 @@ public class ManageMyFlights {
             SearchFlights.display ();
         } );
 
-        log.setOnAction ( e ->{
-
-            MainMenu.close();
-            Customer.logout ();
-        } );
-
         homeButton.setOnAction ( e -> {
             manageMyFlightStage.close ();
             MainMenu.display ();

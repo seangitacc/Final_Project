@@ -85,6 +85,11 @@ class MainMenu {
         manageMyFlight.setOnAction ( e-> ManageAllFlights.display ());
 
         manageFlights.setOnAction ( e-> ManageAllFlights.display ());
+
+        logout.setOnAction ( e ->{
+            MainMenu.close();
+            Customer.logout ();
+        } );
     }
 
     public static void close(){

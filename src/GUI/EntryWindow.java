@@ -4,6 +4,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 public class EntryWindow {
 
     private static final Stage EntryWindow = new Stage ();
+    static Scene entryScene;
 
     public static void display(){
 
@@ -34,10 +37,10 @@ public class EntryWindow {
         VBox vb = new VBox(20);
         HBox hb = new HBox(20);
 
-        Scene entryScene;
+
 
         hb.getChildren ().addAll (loginButton,registerButton );
-        vb.getChildren ().addAll ( welcomeMessage,hb );
+        vb.getChildren ().addAll ( welcomeMessage,hb);
         vb.setAlignment ( Pos.CENTER );
         hb.setAlignment ( Pos.CENTER );
 
@@ -52,5 +55,9 @@ public class EntryWindow {
 
     public static void close(){
         EntryWindow.close();
+    }
+
+    public static Scene getScene(){
+        return entryScene;
     }
 }
