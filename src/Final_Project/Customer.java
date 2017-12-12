@@ -320,7 +320,7 @@ public class Customer extends User implements newUser, returningUser {
                     alert.setContentText("You've cannot book a conflicting flight!");
 
                     alert.showAndWait();
-                }else if(flightsCount < seatCount){//Cannot book a full flight
+                }else if(flightsCount == seatCount){//Cannot book a full flight
                         Alert alert = new Alert( Alert.AlertType.ERROR);
                         alert.setTitle ( "Warning" );
                         alert.setHeaderText ( "Flight Booking" );
