@@ -252,7 +252,7 @@ class ManageAllFlights {
 
             v.getChildren ().addAll ( header,g );
 
-            Scene s = new Scene ( v, 500,250 );
+            Scene s = new Scene ( v, 400,250 );
             s.getStylesheets ().add ( "Theme.css" );
             Stage s1 = new Stage (  );
 
