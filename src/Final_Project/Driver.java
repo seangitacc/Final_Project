@@ -62,13 +62,13 @@ public class Driver extends Application {
     }
 
     public static final String SPLASH_IMAGE =
-            "https://i.imgur.com/7OxXNQs.png";
+            "https://i.imgur.com/gLcHRXZ.png";
 
     private Pane splashLayout;
     private ProgressBar loadProgress;
     private Label progressText;
     private static final int SPLASH_WIDTH = 676;
-    private static final int SPLASH_HEIGHT = 227;
+    private static final int SPLASH_HEIGHT = 300;
 
     @Override
     public void init() {
